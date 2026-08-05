@@ -1,0 +1,458 @@
+,,,,,,,,
+,TRANSACTION,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,Month,Date,Actual ,Type,Category,Items,Amount,Description
+,A2601,1/1/2026,1/1/2026,Income,0,Salary-Albert,"19,700,000",
+,A2601,1/2/2026,1/2/2026,Expense,Fixed,Pocket,"1,500,000",Albert
+,A2601,1/1/2026,,Expense,Fixed,Ma2,"2,000,000",
+,A2601,1/1/2026,,Expense,Fixed,Ben noi,"1,000,000",
+,A2601,1/1/2026,,Expense,Fixed,Pocket,"1,500,000",Annie
+,A2601,1/1/2026,,Expense,Unexpected,Clothes,"2,000,000",Annie
+,A2601,1/1/2026,,Expense,Meal,Eating out,"150,000",
+,A2601,1/1/2026,,Expense,Meal,Eating out,"80,000",12/27/2025-trả albert
+,A2601,1/1/2026,,Expense,Meal,Market-Aeon,"735,410",
+,A2601,1/1/2026,,Expense,Unexpected,Cosmetic,"289,600",
+,A2601,1/1/2026,,Expense,Unexpected,Unexpected,"66,500",viet so annie
+,A2601,1/1/2026,,Expense,Fixed,Milk,"965,000",
+,A2601,1/1/2026,,Expense,Unexpected,Unexpected,"1,040,000",12/28
+,A2601,1/1/2026,,Expense,Fixed,Water,"121,000",trả albert
+,A2601,1/1/2026,12/25/2025,Income,0,Salary-Annie,"19,000,000",
+,A2601,1/1/2026,,Expense,Fixed,Diapers,"279,000",
+,A2601,1/1/2026,,Expense,Meal,Eating out,"199,000",cua
+,A2601,1/1/2026,,Expense,Unexpected,Unexpected,"463,000",sac dt
+,A2601,1/1/2026,,Expense,Meal,Eating out,"30,000",
+,A2601,1/2/2026,,Expense,Unexpected,Unexpected,"969,000",ve ngoia
+,A2601,1/4/2026,,Expense,Unexpected,Unexpected,"1,110,000",nui ba den
+,A2601,1/2/2026,,Expense,Fixed,Ben ngoai,"500,000",
+,A2601,1/2/2026,,Expense,Unexpected,Cosmetic,"55,500",
+,A2601,1/4/2026,,Expense,Meal,Market-Aeon,"85,000",gao
+,A2601,1/5/2026,,Expense,Meal,Eating out,"40,000",
+,A2601,1/3/2026,,Expense,Fixed,Wifi,"180,000",
+,A2601,1/6/2026,,Expense,Fixed,EVN,"305,000",
+,A2601,1/6/2026,,Expense,Fixed,SHP,"280,000",
+,A2601,1/8/2026,,Expense,Unexpected,Unexpected,"70,000",mc 365
+,A2601,1/9/2026,,Expense,Meal,Eating out,"60,000",
+,A2601,1/9/2026,,Expense,Fixed,Milk,"278,000",
+,A2601,1/9/2026,,Expense,Meal,Eating out,"55,000",
+,A2601,1/9/2026,,Expense,Meal,Market-Aeon,"401,000",
+,A2601,1/10/2026,,Expense,Meal,Market-Aeon,"944,000",
+,A2601,1/8/2026,,Expense,Fixed,Univer-loan,"2,675,000",
+,A2601,1/14/2026,,Expense,Unexpected,Medicine,"50,600",
+,A2601,1/14/2026,,Expense,Meal,Eating out,"283,900",
+,A2601,1/14/2026,,Expense,Unexpected,Unexpected,"139,000",
+,A2601,1/15/2026,,Expense,Meal,Eating out,"35,000",
+,A2601,1/15/2026,,Expense,Unexpected,Unexpected,"95,000",
+,A2601,1/16/2026,,Expense,Unexpected,Unexpected,"1,800,000",ngoc trai
+,A2601,1/17/2026,,Expense,Meal,Market-Aeon,"795,000",
+,A2601,1/18/2026,,Expense,Unexpected,Cosmetic,"79,000",bcs
+,A2601,1/18/2026,,Expense,Meal,Market-Aeon,"20,000",
+,A2601,1/18/2026,,Expense,Unexpected,Baby equipment,"120,000",chieu
+,A2601,1/19/2026,,Expense,Unexpected,Clothes,"660,000",albert do tet
+,A2601,1/20/2026,,Expense,Fixed,Milk,"626,000",
+,A2601,1/21/2026,,Expense,Unexpected,Unexpected,"119,000",
+,A2601,1/22/2026,,Expense,Unexpected,Unexpected,"53,000",
+,A2601,1/23/2026,,Expense,Unexpected,Baby equipment,"160,000",chieu
+,A2601,1/23/2026,,Expense,Unexpected,Baby equipment,"50,000",giat do
+,A2601,1/23/2026,,Expense,Unexpected,Wedding,"1,300,000",dam cuoi nam
+,A2601,1/25/2026,,Expense,Meal,Eating out,"90,000",
+,A2601,1/22/2026,,Expense,Fixed,House,"3,000,000",
+,A2602,2/1/2026,1/23/2026,Income,0,Salary-Albert,"20,000,000",
+,A2602,2/1/2026,,Expense,Fixed,Pocket,"1,500,000",
+,A2602,2/1/2026,,Expense,Fixed,Ma2,"2,000,000",con 1000000
+,A2602,2/1/2026,,Expense,Meal,Eating out,"35,000",
+,A2602,2/1/2026,,Expense,Unexpected,Clothes,"1,564,000",annie
+,A2602,2/1/2026,,Expense,Meal,Market-Aeon,"627,000",
+,A2602,2/1/2026,,Expense,Fixed,Gas,"380,000",
+,A2602,2/1/2026,,Expense,Meal,Eating out,"464,000",kichi kichi
+,A2602,2/1/2026,,Expense,Unexpected,Outing,"178,000",nhom hoc
+,A2602,2/1/2026,1/30/2026,Income,0,Salary-Annie,"19,700,000",
+,A2602,2/1/2026,,Expense,Fixed,Pocket,"1,500,000",
+,A2602,2/1/2026,,Expense,Fixed,Ben noi,"1,000,000",
+,A2602,2/1/2026,,Expense,Unexpected,Clothes,"1,866,000",party
+,A2602,2/1/2026,,Expense,Meal,Market-Aeon,"23,500",
+,A2602,2/1/2026,,Expense,Fixed,Tuition fee,"3,000,000",chinese
+,A2602,2/1/2026,,Expense,Meal,Market-Aeon,"43,000",
+,A2602,2/1/2026,,Expense,Fixed,Milk,"1,228,000",
+,A2602,2/2/2026,,Expense,Meal,Market-Aeon,"1,432,000",
+,A2602,2/2/2026,,Expense,Unexpected,Shopping,"553,000",ipad
+,A2602,2/2/2026,,Expense,Meal,Market-Aeon,"24,500",
+,A2602,2/2/2026,,Expense,Fixed,Given,"402,000",
+,A2602,2/3/2026,,Expense,Fixed,Vehicle,"184,000",taxi
+,A2602,2/3/2026,,Expense,Fixed,Wifi,"180,000",
+,A2602,2/3/2026,,Expense,Unexpected,Clothes,"401,000",albert
+,A2602,2/5/2026,,Expense,Fixed,EVN,"225,000",
+,A2602,2/5/2026,,Expense,Fixed,Water,"109,000",
+,A2602,2/5/2026,,Expense,Fixed,SHP,"280,000",
+,A2602,2/23/2026,,Expense,Fixed,House,"3,300,000",
+,A2602,2/13/2026,,Expense,Unexpected,Medicine,"5,000,000",
+,A2602,2/23/2026,,Expense,Unexpected,Unexpected,"12,201,000",Chi phí trong Tet
+,A2603,3/1/2026,,Expense,Unexpected,Outing,"300,000",an Trang Bang
+,A2603,3/1/2026,,Expense,Unexpected,Baby equipment,"219,000",Binh Sưa
+,A2603,3/1/2026,,Expense,Unexpected,Cosmetic,"1,304,000",my pham
+,A2603,3/1/2026,,Expense,Meal,Market-Aeon,"1,181,000",
+,A2603,3/1/2026,2/25/2026,Income,0,Salary-Albert,"20,000,000",
+,A2603,3/1/2026,,Expense,Fixed,Pocket,"1,500,000",
+,A2603,3/1/2026,,Expense,Fixed,Pocket,"2,500,000",
+,A2603,3/3/2026,,Expense,Unexpected,Outing,"309,000",
+,A2603,3/2/2026,,Expense,Fixed,Ma2,"2,000,000",
+,A2603,3/2/2026,,Expense,Fixed,Wifi,"180,000",
+,A2603,3/3/2026,,Expense,Unexpected,Medicine,"209,000",
+,A2603,3/5/2026,,Expense,Unexpected,Baby equipment,"259,000",ho
+,A2603,3/4/2026,,Expense,Fixed,Milk,"1,071,000",
+,A2603,3/6/2026,,Expense,Unexpected,Cosmetic,"1,386,000",
+,A2603,3/7/2026,,Expense,Meal,Market-Aeon,"665,000",
+,A2603,3/7/2026,,Expense,Meal,Eating out,"22,000",sữa
+,A2603,3/3/2026,,Expense,Fixed,Ben noi,"1,000,000",
+,A2603,3/7/2026,,Expense,Meal,Market-Aeon,"108,000",
+,A2603,3/7/2026,,Expense,Unexpected,Unexpected,"3,290,000",điện thoại má 2
+,A2603,3/10/2026,,Expense,Fixed,Water,"122,000",
+,A2603,3/10/2026,,Expense,Fixed,EVN,"187,000",
+,A2603,3/10/2026,,Expense,Fixed,SHP,"280,000",
+,A2603,3/10/2026,,Expense,Fixed,Univer-loan,"1,304,000",
+,A2603,3/1/2026,3/30/2026,Income,0,Salary-Annie,"17,666,000",
+,A2603,3/13/2026,,Expense,Fixed,Tuition fee,"800,000",học phí excel
+,A2603,3/14/2026,,Expense,Meal,Market-Aeon,"85,000",
+,A2603,3/15/2026,,Expense,Meal,Market-Aeon,"774,000",
+,A2603,3/13/2026,,Expense,Fixed,Tuition fee,"199,000",chatgpt
+,A2603,3/13/2026,,Expense,Unexpected,Shopping,"285,000",sandals-Capie
+,A2603,3/14/2026,,Expense,Fixed,Milk,"278,000",
+,A2603,3/14/2026,,Expense,Meal,Eating out,"49,000",
+,A2603,3/15/2026,,Expense,Unexpected,Baby equipment,"38,000",rửa bình
+,A2603,3/15/2026,,Expense,Unexpected,Unexpected,"48,000",albert
+,A2603,3/17/2026,,Expense,Unexpected,Unexpected,"604,000",
+,A2603,3/21/2026,,Expense,Unexpected,Unexpected,"60,000",7-11
+,A2603,3/19/2026,,Expense,Unexpected,Unexpected,"60,000",7-11
+,A2603,3/22/2026,,Expense,Meal,Market-Aeon,"910,000",
+,A2603,3/20/2026,,Expense,Unexpected,Unexpected,"20,000",7-11
+,A2603,3/21/2026,,Expense,Meal,Market-Aeon,"50,000",Kho
+,A2603,3/22/2026,,Expense,Unexpected,Unexpected,"60,000",7-11
+,A2603,3/23/2026,,Expense,Unexpected,Unexpected,"1,200,000",Annie mượn
+,A2603,3/23/2026,,Expense,Fixed,Vehicle,"70,000",xang
+,A2603,3/23/2026,,Expense,Fixed,House,"3,300,000",
+,A2603,3/22/2026,,Expense,Meal,Eating out,"95,000",Che
+,A2603,3/22/2026,,Expense,Unexpected,Shopping,"100,000",cay
+,A2603,3/22/2026,,Expense,Unexpected,Unexpected,"34,000",carton
+,A2603,3/22/2026,,Expense,Unexpected,Unexpected,"39,000",ship balo
+,A2603,3/14/2026,,Expense,Unexpected,Unexpected,"500,000",cho Bi
+,A2603,3/19/2026,,Expense,Fixed,Milk,"955,000",
+,A2603,3/19/2026,,Expense,Unexpected,Unexpected,"110,000",albert+annie mươn
+,A2603,3/16/2026,,Expense,Unexpected,Unexpected,"1,200,000",
+,A2604,4/1/2026,3/25/2026,Income,0,Salary-Albert,"20,000,000",
+,A2604,4/1/2026,3/25/2026,Expense,Unexpected,Unexpected,"616,000",may khoan ban vit
+,A2604,4/1/2026,3/25/2026,Expense,Fixed,Pocket,"1,500,000",albert
+,A2604,4/1/2026,3/26/2026,Expense,Fixed,Ma2,"2,000,000",
+,A2604,4/1/2026,3/27/2026,Expense,Meal,Eating out,"49,000",goi du du
+,A2604,4/1/2026,3/27/2026,Expense,Unexpected,Shopping,"100,000",ke sach
+,A2604,4/1/2026,3/28/2026,Expense,Meal,Market-Aeon,"935,000",
+,A2604,4/1/2026,3/28/2026,Expense,Meal,Eating out,"95,000",
+,A2604,4/1/2026,3/28/2026,Expense,Unexpected,Shopping,"85,000",ke sach
+,A2604,4/1/2026,3/29/2026,Expense,Meal,Market-Aeon,"57,000",
+,A2604,4/1/2026,3/29/2026,Expense,Unexpected,Outing,"269,000",nha khuong
+,A2604,4/1/2026,4/1/2026,Expense,Meal,Market-Aeon,"221,000",
+,A2604,4/1/2026,3/31/2026,Expense,Unexpected,Shopping,"104,000",ke sach
+,A2604,4/1/2026,3/31/2026,Expense,Fixed,Tuition fee,"800,000",
+,A2604,4/1/2026,4/1/2026,Expense,Fixed,Milk,"1,242,000",
+,A2604,4/1/2026,4/2/2026,Expense,Fixed,Wifi,"180,000",
+,A2604,4/2/2026,4/2/2026,Expense,Meal,Market-Aeon,"89,000",
+,A2604,4/1/2026,3/28/2026,Expense,Unexpected,Shopping,"51,000",oc vit
+,A2604,4/1/2026,3/31/2026,Income,0,Salary-Annie,"18,000,000",
+,A2604,4/7/2026,,Expense,Fixed,Water,"282,000",
+,A2604,4/7/2026,,Expense,Fixed,EVN,"109,000",
+,A2604,4/7/2026,,Expense,Fixed,SHP,"280,000",
+,A2604,4/4/2026,,Expense,Meal,Market-Aeon,"598,000",
+,A2604,4/4/2026,,Expense,Meal,Market-Aeon,"79,000",
+,A2604,4/4/2026,,Expense,Unexpected,Shopping,"59,000",oc vit
+,A2604,4/3/2026,,Expense,Fixed,Ben noi,"1,000,000",
+,A2604,4/3/2026,,Expense,Meal,Eating out,"255,000",
+,A2604,4/3/2026,,Expense,Meal,Eating out,"65,000",
+,A2604,4/4/2026,,Expense,Unexpected,Baby equipment,"106,000",
+,A2604,4/4/2026,,Expense,Meal,Market-Aeon,"90,000",gao
+,A2604,4/6/2026,,Expense,Unexpected,Shopping,"58,000",
+,A2604,4/6/2026,,Expense,Fixed,Pocket,"3,000,000",sam sam
+,A2604,4/12/2026,,Expense,Fixed,University-Albert,"7,830,000",
+,A2604,4/13/2026,,Expense,Fixed,Univer-loan,"2,350,000",
+,A2604,,,,Fixed,House,"3,300,000",
+,A2604,4/9/2026,,Expense,Unexpected,Shopping,"61,000",diana
+,A2604,4/12/2026,,Expense,Meal,Market-Aeon,"708,000",
+,A2604,4/9/2026,,Expense,Meal,Eating out,"140,000",vit quay
+,A2604,4/8/2026,,Expense,Unexpected,Baby equipment,"399,000",quat may
+,A2604,4/9/2026,,Expense,Unexpected,Shopping,"1,303,000",bep dien
+,A2604,4/11/2026,,Expense,Unexpected,Unexpected,"58,000",7eleven
+,A2604,4/11/2026,,Expense,Unexpected,Outing,"220,000",
+,A2604,4/11/2026,,Expense,Meal,Eating out,"90,000",an sang
+,A2604,4/13/2026,,Expense,Unexpected,Unexpected,"70,000",albert
+,A2604,4/13/2026,,Expense,Unexpected,Unexpected,"50,000",albert
+,A2604,4/13/2026,,Expense,Unexpected,Unexpected,"280,000",albert
+,A2604,4/13/2026,,Expense,Unexpected,Unexpected,"199,000",chat gpt
+,A2604,4/13/2026,,Expense,Unexpected,Unexpected,"60,000",sinh nhat
+,A2604,4/13/2026,,Expense,Unexpected,Baby equipment,"70,000",toc capie
+,A2604,4/14/2026,,Expense,Fixed,Milk,"1,237,000",
+,A2604,4/14/2026,,Expense,Meal,Market-Aeon,"189,000",
+,A2604,4/15/2026,,Expense,Unexpected,Unexpected,"40,000",ts
+,A2604,4/15/2026,,Expense,Fixed,Tuition fee,"800,000",
+,A2604,4/15/2026,,Expense,Unexpected,Unexpected,"25,000",cafe
+,A2604,4/16/2026,,Expense,Unexpected,Unexpected,"261,000",Annie muon
+,A2604,4/16/2026,,Expense,Unexpected,Unexpected,"15,000",albert
+,A2604,4/18/2026,,Expense,Unexpected,Market-Aeon,"874,000",
+,A2604,4/19/2026,,Expense,Meal,Market-Aeon,"84,000",
+,A2604,4/19/2026,,Expense,Meal,Eating out,"205,000",cua
+,A2604,4/19/2026,,Expense,Unexpected,Unexpected,"50,000",xang
+,A2604,4/20/2026,,Expense,Unexpected,Unexpected,"19,000",ts
+,A2604,4/22/2026,,Expense,Unexpected,Unexpected,"70,000",
+,A2604,5/1/2026,4/24/2026,Expense,Unexpected,Office,"16,000",
+,A2605,5/1/2026,4/24/2026,Expense,Fixed,SHP,"5,000",xe dap
+,A2605,5/1/2026,,Expense,Fixed,Pocket,"1,500,000",
+,A2605,5/1/2026,,Expense,Fixed,Pocket,"1,500,000",
+,A2605,5/1/2026,4/24/2026,Income,Unexpected,Cosmetic,"2,000,000",
+,A2605,5/1/2026,4/24/2026,Income,0,Salary-Albert,"21,000,000",
+,A2605,5/1/2026,4/25/2026,Expense,Meal,Eating out,"356,000",
+,A2605,5/1/2026,4/25/2026,Expense,Meal,Eating out,"105,000",
+,A2605,5/1/2026,4/26/2026,Expense,Meal,Eating out,"83,000",
+,A2605,5/1/2026,4/26/2026,Expense,Meal,Market-Aeon,"193,000",
+,A2605,5/1/2026,5/1/2026,Expense,Meal,Market-Aeon,"272,000",
+,A2605,5/1/2026,5/1/2026,Expense,Fixed,Ben noi,"840,000",500k an + 340 thuoc
+,A2605,5/1/2026,5/2/2026,Expense,Meal,Market-Aeon,176000,
+,A2605,5/1/2026,5/3/2026,Expense,Meal,Market-Aeon,"708,000",
+,A2605,5/1/2026,5/3/2026,Expense,Meal,Eating out,"70,000",
+,A2605,5/1/2026,5/3/2026,Expense,Fixed,Milk,"1,020,000",
+,A2605,5/1/2026,5/4/2026,Expense,Fixed,Wifi,"180,000",
+,A2605,5/1/2026,5/1/2026,Income,0,Salary-Annie,"19,300,000",
+,A2605,5/1/2026,,Expense,Fixed,Ma2,"2,000,000",
+,A2605,5/1/2026,,Expense,Fixed,Ben noi,"4,000,000",
+,A2605,5/1/2026,,Expense,Fixed,Ben ngoai,"1,000,000",
+,A2605,5/5/2026,5/9/2026,Expense,Fixed,Univer-loan,"2,000,000",
+,A2605,5/5/2026,,Expense,Fixed,EVN,"256,000",
+,A2605,5/5/2026,,Expense,Fixed,Water,"145,000",
+,A2605,5/5/2026,,Expense,Fixed,SHP,"300,000",
+,A2605,5/10/2026,,Expense,Meal,Market-Aeon,"545,000",
+,A2605,5/10/2026,,Expense,Fixed,Tuition fee,"370,000",duoling go
+,A2605,5/9/2026,,Expense,Fixed,Tuition fee,"800,000",
+,A2605,5/10/2026,,Expense,Meal,Eating out,"112,000",
+,A2605,5/9/2026,,Expense,Unexpected,Medicine,"750,000",nha khoa
+,A2605,5/9/2026,,Expense,Meal,Eating out,"90,000",
+,A2605,5/11/2026,,Expense,Fixed,Univer-loan,"295,000",
+,A2605,5/12/2026,,Expense,Unexpected,Baby equipment,"200,000",ghế Capie
+,A2605,5/13/2026,,Expense,Unexpected,Shopping,"35,000",kem Capie
+,A2605,5/14/2026,,Expense,Unexpected,Unexpected,"54,000",ts
+,A2605,5/14/2026,,Expense,Meal,Eating out,"90,000",an sang
+,A2605,5/13/2026,,Expense,Fixed,Milk,"435,000",sua
+,A2605,5/13/2026,,Expense,Meal,Eating out,"30,000",an sang
+,A2605,5/15/2026,,Expense,Unexpected,Unexpected,"44,000",ts
+,A2605,5/15/2026,,Expense,Unexpected,Baby equipment,"929,000",đồ mẫu giáo
+,A2605,5/15/2026,,Expense,Unexpected,Unexpected,"599,000",chat gpt
+,A2605,5/16/2026,,Expense,Unexpected,Unexpected,"49,000",ts
+,A2605,5/16/2026,,Expense,Fixed,Milk,"378,000",
+,A2605,5/17/2026,,Expense,Meal,Eating out,"60,000",rau
+,A2605,5/17/2026,,Expense,Meal,Market-Aeon,"833,000",
+,A2605,5/17/2026,,Expense,Meal,Market-Aeon,"100,000",rau
+,A2605,5/17/2026,,Expense,Fixed,Vehicle,"50,000",xang
+,A2605,5/17/2026,,Expense,Meal,Market-Aeon,"65,000",
+,A2605,5/17/2026,,Expense,Meal,Eating out,"90,000",an sang
+,A2605,5/17/2026,,Expense,Fixed,Milk,"348,000",
+,A2605,5/17/2026,,Expense,Unexpected,Unexpected,"50,000",wifi
+,A2605,5/17/2026,,Expense,Unexpected,Unexpected,"305,000",don capie
+,A2605,5/19/2026,,Expense,Unexpected,Unexpected,"52,000",ts
+,A2605,5/20/2026,,Expense,Unexpected,Unexpected,"92,000",ts
+,A2605,5/20/2026,,Expense,Unexpected,Office,"34,000",sinh nhat
+,A2605,5/22/2026,,Expense,Unexpected,Wedding,"500,000",conan
+,A2605,5/22/2026,,Expense,Fixed,House,"3,300,000",
+,A2605,5/22/2026,,Expense,Meal,Eating out,"90,000",an sang
+,A2605,5/21/2026,,Expense,Unexpected,Shopping,"50,000",online
+,A2605,5/21/2026,,Expense,Meal,Market-Aeon,"85,000",gao
+,A2605,5/21/2026,,Expense,Unexpected,Unexpected,"29,000",
+,A2605,5/23/2026,,Expense,Unexpected,Unexpected,"58,000",
+,A2605,5/23/2026,,Expense,Unexpected,Unexpected,"19,000",
+,A2605,5/23/2026,,Expense,Meal,Market-Aeon,"100,000",
+,A2605,5/23/2026,,Expense,Meal,Market-Aeon,"27,000",trai cay
+,A2605,5/23/2026,,Expense,Fixed,Vehicle,"10,000",
+,A2605,5/23/2026,,Expense,Meal,Eating out,"90,000",
+,A2605,5/24/2026,,Expense,Meal,Market-Aeon,"689,000",
+,A2605,5/24/2026,,Expense,Meal,Eating out,"77,000",an sang
+,A2605,5/24/2026,,Expense,Meal,Market-Aeon,"143,000",
+,A2605,5/24/2026,,Expense,Fixed,Vehicle,"35,000",rua xe
+,A2605,5/24/2026,,Expense,Fixed,Diapers,"278,000",
+,A2605,5/24/2026,,Expense,Fixed,Milk,"242,000",
+,A2606,6/1/2026,5/25/2026,Income,0,Salary-Albert,"21,300,000",
+,A2606,6/1/2026,5/25/2026,Expense,Fixed,Ma2,"2,000,000",
+,A2606,6/1/2026,5/26/2026,Expense,Unexpected,Baby equipment,"700,000",
+,A2606,6/1/2026,5/26/2026,Expense,Fixed,Pocket,"1,500,000",
+,A2606,6/1/2026,5/27/2026,Expense,Unexpected,Cosmetic,"1,000,000",Annie muon
+,A2606,6/1/2026,5/29/2026,Income,0,Salary-Annie,"19,900,000",
+,A2606,6/1/2026,5/26/2026,Expense,Unexpected,Shopping,"70,000",
+,A2606,6/1/2026,5/28/2026,Expense,Meal,Eating out,"186,000",nuoc sấu
+,A2606,6/1/2026,5/29/2026,Expense,Meal,Eating out,"90,000",an sang
+,A2606,6/1/2026,5/30/2026,Expense,Fixed,Milk,"489,000",
+,A2606,6/1/2026,5/31/2026,Expense,Meal,Market-Aeon,"1,026,000",
+,A2606,6/1/2026,5/31/2026,Expense,Meal,Market-Aeon,"167,000",rau+trai cay
+,A2606,6/1/2026,5/31/2026,Expense,Fixed,Vehicle,"200,000",xang
+,A2606,6/1/2026,5/31/2026,Expense,Fixed,Given,"500,000",
+,A2606,6/1/2026,,Expense,Unexpected,Medicine,"2,498,000",sam sam tu du
+,A2606,6/8/2026,,Expense,Unexpected,Shopping,"210,000",co vua
+,A2606,6/8/2026,,Expense,Fixed,Water,"133,000",
+,A2606,6/8/2026,,Expense,Fixed,EVN,"328,000",
+,A2606,6/8/2026,,Expense,Fixed,SHP,"300,000",
+,A2606,6/3/2026,,Expense,Fixed,Ben noi,"1,000,000",
+,A2606,6/22/2026,,Expense,Fixed,House,"3,300,000",
+,A2606,6/8/2026,,Expense,Fixed,Univer-loan,"2,000,000",
+,A2606,6/2/2026,,Expense,Fixed,Wifi,"180,000",
+,A2606,6/3/2026,,Expense,Fixed,Milk,"510,000",
+,A2606,6/3/2026,,Expense,Unexpected,Shopping,"210,000",nuoc sau
+,A2606,6/4/2026,,Expense,Meal,Eating out,"110,000",
+,A2606,6/6/2026,,Expense,Meal,Eating out,"100,000",
+,A2606,6/6/2026,,Expense,Unexpected,Shopping,"13,000",bìa thư
+,A2606,6/5/2026,,Expense,Unexpected,Medicine,"135,000",
+,A2606,6/7/2026,,Expense,Meal,Market-Aeon,"810,000",
+,A2606,6/7/2026,,Expense,Meal,Eating out,"75,000",
+,A2606,6/7/2026,,Expense,Unexpected,Cosmetic,"220,000",cat toc
+,A2606,6/7/2026,,Expense,Unexpected,Outing,"368,000",an ca hoi
+,A2606,6/7/2026,,Expense,Meal,Market-Aeon,"85,000",gao
+,A2606,6/7/2026,,Expense,Unexpected,Baby equipment,"755,000",loa+sach
+,A2606,6/7/2026,,Expense,Unexpected,Shopping,"399,000",áo + áo mưa
+,A2606,6/7/2026,,Expense,Fixed,Pocket,"2,300,000",annie
+,,,,Expense,,,,
+,,,,Expense,,,,
+,A2606,6/8/2026,,Expense,Fixed,Univer-loan,"305,000",
+,A2606,6/9/2026,,Expense,Unexpected,Medicine,"94,000",
+,A2606,6/9/2026,,Expense,Fixed,Milk,"549,000",
+,A2606,6/10/2026,,Expense,Unexpected,Shopping,"29,000",
+,A2606,6/11/2026,,Expense,Meal,Eating out,"90,000",an sang
+,A2606,6/10/2026,,Expense,Unexpected,Medicine,"150,000",Capie
+,A2606,6/10/2026,,Expense,Meal,Market-Aeon,"85,000",
+,A2606,6/13/2026,,Expense,Unexpected,Shopping,"191,000",ts
+,A2606,6/12/2026,,Expense,Unexpected,Shopping,"48,000",ts
+,A2606,6/12/2026,,Expense,Unexpected,Unexpected,"15,000",in tài liệu
+,A2606,6/12/2026,,Expense,Unexpected,Medicine,"200,000",
+,A2606,6/16/2026,,Expense,Unexpected,Shopping,"205,000",muc buoi + day chuoi
+,A2606,6/16/2026,,Expense,Meal,Eating out,"116,000",
+,A2606,6/16/2026,,Expense,Fixed,Tuition fee,"800,000",
+,A2606,6/16/2026,,Expense,Meal,Eating out,"107,000",
+,A2606,6/15/2026,,Expense,Unexpected,Shopping,"39,000",ts
+,A2606,6/17/2026,,Expense,Meal,Eating out,"90,000",
+,A2606,6/16/2026,,Expense,Unexpected,Outing,"210,000",xem phim
+,A2606,6/16/2026,,Expense,Meal,Eating out,"1,000,000","gửi ma 2 700k, 300k mua do an"
+,A2606,6/13/2026,,Expense,Unexpected,Wedding,"500,000",dam cuoi misa
+,A2606,6/17/2026,,Expense,Fixed,Milk,"242,000",
+,A2606,6/18/2026,,Expense,Unexpected,Office,"74,000",sinh nhat
+,A2606,6/18/2026,,Expense,Unexpected,Medicine,"105,000",
+,A2606,6/18/2026,,Expense,Meal,Eating out,"84,000",
+,A2606,6/19/2026,,Expense,Unexpected,Shopping,"51,000",ts
+,A2606,6/19/2026,,Expense,Meal,Eating out,"60,000",
+,A2606,6/20/2026,,Expense,Meal,Eating out,"53,000",
+,A2606,6/20/2026,,Expense,Meal,Market-Aeon,"244,000",
+,A2606,6/22/2026,,Expense,Unexpected,Shopping,"25,000",ts
+,A2606,6/23/2026,,Expense,Unexpected,Unexpected,"5,000,000",mượn tiền ăn
+,A2607,7/1/2026,6/25/2026,Income,Fixed,Salary-Albert,"21,300,000",
+,A2607,7/1/2026,6/25/2026,Expense,Unexpected,Unexpected,"1,000,000",trả thang 6
+,A2607,7/1/2026,6/25/2026,Expense,Unexpected,Baby equipment,"83,000",but mau
+,A2607,7/1/2026,6/27/2026,Expense,Meal,Eating out,"120,000",
+,A2607,7/1/2026,6/27/2026,Expense,Unexpected,Shopping,"205,000",carton
+,A2607,7/1/2026,6/27/2026,Expense,Unexpected,Shopping,"200,000",chiếu
+,A2607,7/1/2026,6/27/2026,Expense,Unexpected,Shopping,"30,000",nuoc suoi
+,A2607,7/1/2026,6/27/2026,Expense,Unexpected,Unexpected,"737,000",Trung+Vân
+,A2607,7/1/2026,6/28/2026,Expense,Meal,Market-Aeon,"1,051,000",
+,A2607,7/1/2026,6/28/2026,Expense,Unexpected,Outing,"2,000,000",xem Xiếc
+,A2607,7/1/2026,6/28/2026,Expense,Unexpected,Shopping,"272,000",chảo
+,A2607,7/1/2026,6/29/2026,Expense,Fixed,Milk,"712,000",
+,A2607,7/1/2026,6/30/2026,Expense,Fixed,E5,"50,000",xang
+,A2607,7/8/2026,,Expense,Fixed,House,,
+,A2607,7/8/2026,,Expense,Fixed,Water,"145,000",
+,A2607,7/8/2026,,Expense,Fixed,EVN,"298,000",
+,A2607,7/8/2026,,Expense,Fixed,Ben noi,"1,000,000",
+,A2607,7/1/2026,6/30/2026,Expense,Fixed,Pocket,"1,500,000",
+,A2607,7/1/2026,6/25/2026,Expense,Fixed,Ma2,"2,000,000",
+,A2607,7/1/2026,6/30/2026,Expense,Unexpected,Baby equipment,"15,000",keo sua
+,A2607,7/1/2026,6/30/2026,Expense,Fixed,E5,"50,000",xang
+,A2607,7/1/2026,6/30/2026,Expense,Meal,Market-Aeon,"85,000",
+,A2607,7/2/2026,,Expense,Unexpected,Cosmetic,"101,000",
+,A2607,7/2/2026,,Expense,Fixed,Capie -Tuition fee,"5,731,000",
+,A2607,7/2/2026,,Expense,Unexpected,Baby equipment,"37,000",
+,A2607,7/3/2026,,Expense,Meal,Eating out,"70,000",banh trang
+,A2607,7/4/2026,,Expense,Meal,Breakfast,"75,000",
+,A2607,7/4/2026,,Expense,Fixed,E5,"50,000",
+,A2607,7/4/2026,,Expense,Meal,Market-Aeon,"797,000",
+,A2607,7/4/2026,,Expense,Meal,Breakfast,"80,000",
+,A2607,7/4/2026,,Expense,Meal,Eating out,"186,000",ôc
+,A2607,7/4/2026,,Expense,Meal,Market-Aeon,"33,000",trai cay
+,A2607,7/7/2026,,Expense,Meal,Breakfast,"20,000",
+,A2607,7/8/2026,,Expense,Fixed,SHP,"300,000",
+,A2607,7/1/2026,,Income,0,Salary-Annie,"19,000,000",
+,A2607,7/1/2026,,Expense,Fixed,Pocket,"1,500,000",
+,A2607,7/1/2026,,Expense,Fixed,Tuition fee,"5,000,000",Chinese
+,A2607,7/7/2026,,Expense,Meal,Eating out,"86,000",albert
+,A2607,7/7/2026,,Expense,Fixed,Wifi,"180,000",
+,A2607,7/8/2026,,Expense,Unexpected,Shopping,"36,000",albert
+,A2607,7/8/2026,,Expense,Meal,Breakfast,"90,000",
+,A2607,7/9/2026,,Expense,Unexpected,Shopping,"83,000",albert
+,A2607,7/9/2026,,Expense,Fixed,E5,"50,000",
+,A2607,7/9/2026,,Expense,Unexpected,Unexpected,"1,000,000",ma 2 di kham
+,A2607,7/11/2026,,Expense,Meal,Market-Aeon,"779,000",
+,A2607,7/10/2026,,Expense,Unexpected,Medicine,"200,000",
+,A2607,7/11/2026,,Expense,Meal,Breakfast,"155,000",
+,A2607,7/11/2026,,Expense,Unexpected,Shopping,"405,000",
+,A2607,7/11/2026,,Expense,Unexpected,Unexpected,"46,000",albert
+,A2607,7/12/2026,,Expense,Meal,Breakfast,"75,000",
+,A2607,7/12/2026,,Expense,Unexpected,Unexpected,"52,000",albert
+,A2607,7/12/2026,,Expense,Fixed,Univer-loan,"1,500,000",
+,A2607,7/12/2026,,Expense,Fixed,Vaccine,"356,000",
+,A2607,7/12/2026,,Expense,Unexpected,Shopping,"14,400",
+,A2607,7/12/2026,,Expense,Unexpected,Baby equipment,"50,000",
+,A2607,7/13/2026,,Expense,Unexpected,Unexpected,"22,000",albert
+,A2607,7/13/2026,,Expense,Unexpected,Unexpected,"28,000",albert
+,A2607,7/14/2026,,Expense,Unexpected,Baby equipment,"42,000",
+,,7/14/2026,,Expense,Fixed,Milk,"520,000",
+,,7/15/2026,,Expense,Meal,Breakfast,"38,000",
+,,7/15/2026,,Expense,Unexpected,Unexpected,"70,000",ts
+,,7/16/2026,,Expense,Fixed,Tuition fee,"800,000",
+,,7/16/2026,,Expense,Meal,Breakfast,"53,000",
+,,7/16/2026,,Expense,Fixed,E5,"100,000",
+,,7/16/2026,,Expense,Meal,Breakfast,"19,000",ts
+,,7/17/2026,,Expense,Unexpected,Unexpected,"65,000",ts
+,,7/18/2026,,Expense,Unexpected,Outing,"49,000",
+,,7/18/2026,,Expense,Unexpected,Outing,"174,000",
+,,7/18/2026,,Expense,Fixed,E5,"50,000",
+,,7/18/2026,,Expense,Unexpected,Unexpected,"72,000",ts
+,,7/19/2026,,Expense,Unexpected,Unexpected,"75,000",
+,,7/21/2026,,Expense,Meal,Breakfast,"20,000",
+,,7/21/2026,,Expense,Unexpected,Unexpected,"34,000",
+,,7/22/2026,,Expense,Meal,Breakfast,"15,000",
+,,7/23/2026,,Expense,Meal,Breakfast,"15,000",
+,A2608,8/1/2026,7/24/2026,Income,0,Salary-Albert,"21,200,000",
+,A2608,8/1/2026,7/24/2026,Expense,Fixed,Ma2,"2,000,000",
+,A2608,8/1/2026,7/24/2026,Expense,Fixed,Pocket,"1,500,000",
+,A2608,8/1/2026,7/28/2026,Expense,Fixed,Pocket,"1,500,000",
+,A2608,8/1/2026,7/24/2026,Expense,Fixed,E5,"400,000",
+,A2608,8/1/2026,7/26/2026,Expense,Meal,Eating out,"100,000",
+,A2608,8/1/2026,7/25/2026,Expense,Meal,Market-Aeon,"877,000",
+,A2608,8/1/2026,7/25/2026,Expense,Meal,Breakfast,"77,000",
+,A2608,8/1/2026,7/25/2026,Expense,Fixed,Milk,"520,000",
+,A2608,8/1/2026,7/25/2026,Expense,Meal,Market-Aeon,"85,000",
+,A2608,8/1/2026,7/25/2026,Expense,Fixed,Ben ngoai,"2,000,000",
+,A2608,8/1/2026,7/26/2026,Expense,Meal,Breakfast,"90,000",
+,A2608,8/1/2026,7/26/2026,Expense,Meal,Eating out,"42,000",
+,A2608,8/1/2026,7/28/2026,Expense,Fixed,Milk,"195,000",
+,A2608,8/1/2026,7/29/2026,Expense,Meal,Breakfast,"30,000",
+,A2608,8/1/2026,7/30/2026,Expense,Unexpected,Shopping,"50,000",card đt
+,A2608,8/1/2026,7/31/2026,Expense,Unexpected,Shopping,"131,000",Ha thu o
+,A2608,8/2/2026,,Expense,Meal,Market-Aeon,"1,000,000",
+,A2608,8/1/2026,,Expense,Meal,Breakfast,"60,000",
+,A2608,8/1/2026,,Expense,Fixed,Vehicle,"190,000",
+,A2608,8/1/2026,,Expense,Unexpected,Cosmetic,"39,000",
+,A2608,8/1/2026,,Expense,Unexpected,Shopping,"91,000",circle K
+,A2608,8/1/2026,,Expense,Meal,Eating out,"131,000",
+,A2608,8/2/2026,,Expense,Fixed,Vehicle,"20,000",
+,A2608,8/2/2026,,Expense,Unexpected,Outing,"241,000",
+,A2608,8/2/2026,,Expense,Meal,Eating out,"64,000",circle K
+,A2608,8/2/2026,,Expense,Meal,Eating out,"590,000",oc
+,A2608,8/3/2026,,Expense,Unexpected,Shopping,"53,000",ts
+,A2608,8/3/2026,,Expense,Unexpected,Unexpected,"70,000",
+,A2608,8/3/2026,,Expense,Unexpected,Medicine,"150,000",
+,A2608,8/4/2026,,Expense,Meal,Breakfast,"30,000",chao
+,A2608,8/4/2026,,Expense,Meal,Market-Aeon,"42,000",
+,A2608,8/4/2026,,Expense,Meal,Market-Aeon,"64,000",
+,A2608,8/4/2026,,Expense,Unexpected,Unexpected,"19,000",
+,A2608,8/4/2026,,Expense,Fixed,Milk,"780,000",
+,A2608,8/4/2026,,Expense,Fixed,EVN,"410,000","tien dien ma3, ma3 tra"
+,A2608,8/5/2026,,Expense,Unexpected,Unexpected,"25,000",
+,A2608,8/5/2026,,Expense,Meal,Breakfast,"50,000",
+,A2608,8/5/2026,,Expense,Fixed,Wifi,"180,000",
