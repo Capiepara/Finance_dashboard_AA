@@ -1,93 +1,132 @@
 <!doctype html>
-<html lang="vi">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Dashboard quản lý tài chính cá nhân Albert & Annie" />
-  <title>Albert & Annie Finance</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta name="description" content="Personal finance dashboard powered by Google Sheets" />
+  <title>Personal Finance Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+  <script defer src="app.js"></script>
 </head>
 <body>
   <div class="app-shell">
     <aside class="sidebar">
-      <div class="brand">
-        <div class="brand-mark">A²</div>
-        <div><strong>Albert & Annie</strong><span>Personal Finance</span></div>
-      </div>
-      <nav>
-        <button class="nav-btn active" data-page="dashboard">Tổng quan</button>
-        <button class="nav-btn" data-page="expenses">Chi tiêu</button>
-        <button class="nav-btn" data-page="savings">Tiết kiệm</button>
-        <button class="nav-btn" data-page="transactions">Giao dịch</button>
+      <div class="brand">FINANCE<br />DASHBOARD</div>
+      <nav class="nav" aria-label="Main navigation">
+        <button class="nav-item active" data-page="dashboard">Dashboard</button>
+        <button class="nav-item" data-page="transactions">Transactions</button>
+        <button class="nav-item" data-page="savings">Savings</button>
       </nav>
-      <div class="sidebar-note">Dữ liệu được đọc từ Google Sheets hoặc CSV.</div>
+      <div class="sidebar-footer">
+        <label for="monthSelect">MONTH</label>
+        <select id="monthSelect"></select>
+      </div>
     </aside>
 
-    <main>
+    <main class="main-content">
       <header class="topbar">
-        <div><p class="eyebrow">FINANCE TRACKER</p><h1 id="pageTitle">Tổng quan tài chính</h1></div>
-        <div class="filters">
-          <select id="monthFilter" aria-label="Chọn tháng"></select>
-          <button id="refreshBtn" class="primary-btn">Làm mới</button>
+        <div>
+          <p class="eyebrow">PERSONAL FINANCE</p>
+          <h1 id="pageTitle">Dashboard</h1>
+        </div>
+        <div class="topbar-actions">
+          <span id="lastUpdated">Loading data…</span>
+          <button id="refreshButton" class="button">Refresh</button>
         </div>
       </header>
 
-      <div id="loading" class="status">Đang tải dữ liệu…</div>
-      <div id="error" class="status error hidden"></div>
+      <div id="statusMessage" class="status-message" hidden></div>
 
-      <section id="dashboard" class="page active">
-        <div class="kpi-grid">
-          <article class="kpi"><span>Thu nhập</span><strong id="kpiIncome">0 ₫</strong><small id="incomeDelta">Theo tháng đã chọn</small></article>
-          <article class="kpi"><span>Chi tiêu</span><strong id="kpiExpense">0 ₫</strong><small>Dự trù 19.000.000 ₫</small></article>
-          <article class="kpi"><span>Tiết kiệm ròng</span><strong id="kpiNet">0 ₫</strong><small id="savingRate">0% thu nhập</small></article>
-          <article class="kpi"><span>Ngân sách còn lại</span><strong id="kpiRemaining">0 ₫</strong><small id="budgetStatus">0% đã sử dụng</small></article>
-        </div>
+      <section id="dashboardPage" class="page active">
+        <section class="kpi-grid" aria-label="Monthly summary">
+          <article class="kpi-card income"><span>TOTAL INCOME</span><strong id="totalIncome">—</strong><small id="incomeMeta">Selected month</small></article>
+          <article class="kpi-card expense"><span>TOTAL EXPENSE</span><strong id="totalExpense">—</strong><small id="expenseMeta">Selected month</small></article>
+          <article class="kpi-card savings"><span>NET SAVINGS</span><strong id="netSavings">—</strong><small id="savingRate">—</small></article>
+          <article class="kpi-card budget"><span>MONTHLY BUDGET</span><strong>19.0M</strong><small>Planned total expense</small></article>
+          <article class="kpi-card available"><span>BUDGET LEFT</span><strong id="budgetLeft">—</strong><small id="budgetUsage">—</small></article>
+        </section>
 
-        <div class="chart-grid two-one">
-          <article class="panel"><div class="panel-head"><div><h2>Thu nhập theo tháng</h2><p>So sánh Albert và Annie</p></div></div><div class="chart-wrap"><canvas id="incomeChart"></canvas></div></article>
-          <article class="panel"><div class="panel-head"><div><h2>Chi tiêu theo nhóm</h2><p>Fixed, Meal, Unexpected và nhóm khác</p></div></div><div class="chart-wrap"><canvas id="categoryChart"></canvas></div></article>
-        </div>
+        <section class="dashboard-grid">
+          <article class="panel panel-wide">
+            <div class="panel-heading"><div><p class="panel-kicker">MONTHLY VIEW</p><h2>Income Trend by Person</h2></div></div>
+            <div id="incomeChart" class="chart chart-large"></div>
+          </article>
 
-        <div class="chart-grid equal">
-          <article class="panel"><div class="panel-head"><div><h2>Ngân sách tháng</h2><p>So sánh dự trù và thực tế</p></div></div><div id="budgetBars" class="budget-list"></div></article>
-          <article class="panel"><div class="panel-head"><div><h2>Khoản chi lớn nhất</h2><p>Có hiển thị ghi chú trong Description</p></div></div><div id="topExpenses" class="rank-list"></div></article>
-        </div>
+          <article class="panel">
+            <div class="panel-heading"><div><p class="panel-kicker">SELECTED MONTH</p><h2>Expense Trend</h2></div></div>
+            <div id="expenseTrendChart" class="chart"></div>
+          </article>
+
+          <article class="panel category-panel">
+            <div class="panel-heading"><div><p class="panel-kicker">SHARE OF EXPENSE</p><h2>Expense by Category</h2></div></div>
+            <div id="categoryBars" class="category-bars"></div>
+            <div class="category-total"><span>Total</span><strong id="categoryTotal">—</strong></div>
+          </article>
+
+          <article class="panel panel-wide">
+            <div class="panel-heading"><div><p class="panel-kicker">BUDGET CONTROL</p><h2>Spending by Category</h2></div></div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Category</th><th>Budget</th><th>Actual</th><th>% of Expense</th><th>Budget Left</th></tr></thead>
+                <tbody id="budgetTableBody"></tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="panel panel-wide">
+            <div class="panel-heading"><div><p class="panel-kicker">LATEST ACTIVITY</p><h2>Recent Transactions</h2></div><button class="text-button" data-go="transactions">View all</button></div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Date</th><th>Type</th><th>Item</th><th>Category</th><th>Amount</th><th>Note</th></tr></thead>
+                <tbody id="recentTableBody"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
       </section>
 
-      <section id="expenses" class="page">
-        <div class="kpi-grid compact">
-          <article class="kpi"><span>Tổng chi</span><strong id="expenseTotal2">0 ₫</strong></article>
-          <article class="kpi"><span>Meal</span><strong id="mealTotal">0 ₫</strong><small>Ngân sách 4.000.000 ₫</small></article>
-          <article class="kpi"><span>Unexpected</span><strong id="unexpectedTotal">0 ₫</strong><small>Ngân sách 1.000.000 ₫</small></article>
-          <article class="kpi"><span>Fixed</span><strong id="fixedTotal">0 ₫</strong></article>
-        </div>
-        <div class="chart-grid equal">
-          <article class="panel"><h2>Top hạng mục chi tiêu</h2><div class="chart-wrap"><canvas id="itemsChart"></canvas></div></article>
-          <article class="panel"><h2>Chi tiêu theo ngày</h2><div class="chart-wrap"><canvas id="dailyExpenseChart"></canvas></div></article>
-        </div>
-        <article class="panel"><div class="panel-head"><div><h2>Chi tiết chi tiêu</h2><p>Tìm trong Items và Description</p></div><input id="expenseSearch" class="search" placeholder="Tìm giao dịch…" /></div><div class="table-wrap"><table><thead><tr><th>Ngày</th><th>Nhóm</th><th>Hạng mục</th><th>Ghi chú</th><th>Số tiền</th></tr></thead><tbody id="expenseTable"></tbody></table></div></article>
+      <section id="transactionsPage" class="page">
+        <article class="panel">
+          <div class="panel-heading transaction-heading">
+            <div><p class="panel-kicker">FULL HISTORY</p><h2>Transactions</h2></div>
+            <input id="transactionSearch" class="search-input" type="search" placeholder="Search item, category or note" />
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Date</th><th>Month</th><th>Type</th><th>Category</th><th>Item</th><th>Amount</th><th>Description</th></tr></thead>
+              <tbody id="allTransactionsBody"></tbody>
+            </table>
+          </div>
+        </article>
       </section>
 
-      <section id="savings" class="page">
-        <div class="saving-hero"><div><p>Tiền tiết kiệm tháng đã chọn</p><strong id="savingHero">0 ₫</strong><span id="savingHeroSub">Thu nhập trừ chi tiêu</span></div><div class="saving-ring" id="savingRing"><span id="savingRingText">0%</span></div></div>
-        <div id="allocationCards" class="allocation-grid"></div>
-        <div class="chart-grid equal">
-          <article class="panel"><div class="panel-head"><div><h2>Waterfall dòng tiền</h2><p>Thu nhập → chi tiêu → tiết kiệm ròng</p></div></div><div class="chart-wrap"><canvas id="waterfallChart"></canvas></div></article>
-          <article class="panel"><div class="panel-head"><div><h2>Tiết kiệm theo tháng</h2><p>Theo dõi tăng giảm hàng tháng</p></div></div><div class="chart-wrap"><canvas id="savingTrendChart"></canvas></div></article>
-        </div>
-      </section>
-
-      <section id="transactions" class="page">
-        <article class="panel"><div class="panel-head"><div><h2>Tất cả giao dịch</h2><p id="transactionCount">0 giao dịch</p></div><input id="allSearch" class="search" placeholder="Tìm ngày, loại, nhóm, hạng mục…" /></div><div class="table-wrap"><table><thead><tr><th>Tháng</th><th>Ngày</th><th>Loại</th><th>Nhóm</th><th>Hạng mục</th><th>Mô tả</th><th>Số tiền</th></tr></thead><tbody id="allTable"></tbody></table></div></article>
+      <section id="savingsPage" class="page">
+        <section class="savings-summary">
+          <article><span>INCOME</span><strong id="savingIncome">—</strong></article>
+          <article><span>EXPENSE</span><strong id="savingExpense">—</strong></article>
+          <article><span>AVAILABLE TO ALLOCATE</span><strong id="savingAvailable">—</strong></article>
+        </section>
+        <section class="savings-grid">
+          <article class="panel">
+            <div class="panel-heading"><div><p class="panel-kicker">MONTHLY PLAN</p><h2>Savings Allocation</h2></div></div>
+            <div id="allocationList" class="allocation-list"></div>
+          </article>
+          <article class="panel panel-wide">
+            <div class="panel-heading"><div><p class="panel-kicker">CASH FLOW</p><h2>Monthly Waterfall</h2></div></div>
+            <div id="waterfallChart" class="chart chart-large"></div>
+          </article>
+          <article class="panel savings-history-panel">
+            <div class="panel-heading"><div><p class="panel-kicker">TREND</p><h2>Net Savings by Month</h2></div></div>
+            <div id="savingsTrendChart" class="chart"></div>
+          </article>
+        </section>
       </section>
     </main>
   </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
-  <script src="app.js"></script>
 </body>
 </html>
