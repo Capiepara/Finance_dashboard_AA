@@ -1,30 +1,20 @@
-# Personal Finance Dashboard V2
+# Personal Finance Dashboard V3
 
-A static personal finance dashboard designed for GitHub Pages.
+Static GitHub Pages dashboard with no JavaScript chart/parser CDN dependencies.
 
-## Data source
+## Upload to GitHub
+Upload these files to the repository root:
+- index.html
+- styles.css
+- app.js
+- README.md
 
-The site reads the `Transaction` tab directly from Google Sheets using its CSV export URL. There is no `data` folder.
+Then enable Settings > Pages > Deploy from a branch > main > /(root).
 
-## GitHub Pages setup
+## Data
+The app first tries to read the Transaction sheet from Google Sheets. If live access fails, it automatically shows the embedded CSV snapshot so the dashboard never stays blank.
 
-1. Upload `index.html`, `styles.css`, `app.js`, and `README.md` to the repository root.
-2. Open **Settings → Pages**.
-3. Select **Deploy from a branch**.
-4. Choose `main` and `/(root)`.
-5. Save.
-
-## Google Sheet access
-
-The spreadsheet must be shared as **Anyone with the link → Viewer**.
-
-## Budget settings
-
-Edit the `CONFIG` object near the top of `app.js`:
-
-- Total monthly expense budget: 19,000,000
-- Meal budget: 4,000,000
-- Unexpected budget: 1,000,000
-- Savings allocation percentages
-
-The remaining 14,000,000 is displayed under Fixed as an initial planning assumption. You can replace it with detailed category budgets later.
+Current budget settings in app.js:
+- Total: 19M
+- Meal: 4M
+- Unexpected: 1M

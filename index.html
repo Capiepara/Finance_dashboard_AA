@@ -5,128 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Personal finance dashboard powered by Google Sheets" />
   <title>Personal Finance Dashboard</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
-  <script defer src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
   <script defer src="app.js"></script>
 </head>
 <body>
-  <div class="app-shell">
-    <aside class="sidebar">
-      <div class="brand">FINANCE<br />DASHBOARD</div>
-      <nav class="nav" aria-label="Main navigation">
-        <button class="nav-item active" data-page="dashboard">Dashboard</button>
-        <button class="nav-item" data-page="transactions">Transactions</button>
-        <button class="nav-item" data-page="savings">Savings</button>
-      </nav>
-      <div class="sidebar-footer">
-        <label for="monthSelect">MONTH</label>
-        <select id="monthSelect"></select>
-      </div>
-    </aside>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><span>PERSONAL</span><strong>FINANCE</strong></div>
+    <nav class="nav" aria-label="Main navigation">
+      <button class="nav-item active" data-page="dashboard">Dashboard</button>
+      <button class="nav-item" data-page="transactions">Transactions</button>
+      <button class="nav-item" data-page="savings">Savings</button>
+    </nav>
+    <div class="sidebar-footer">
+      <label for="monthSelect">MONTH</label>
+      <select id="monthSelect"></select>
+    </div>
+  </aside>
 
-    <main class="main-content">
-      <header class="topbar">
-        <div>
-          <p class="eyebrow">PERSONAL FINANCE</p>
-          <h1 id="pageTitle">Dashboard</h1>
-        </div>
-        <div class="topbar-actions">
-          <span id="lastUpdated">Loading data…</span>
-          <button id="refreshButton" class="button">Refresh</button>
-        </div>
-      </header>
+  <main class="main-content">
+    <header class="topbar">
+      <div><p class="eyebrow">PERSONAL FINANCE</p><h1 id="pageTitle">Dashboard</h1></div>
+      <div class="topbar-actions"><span id="dataStatus" class="data-status">Loading data…</span><button id="refreshButton" class="button">Refresh</button></div>
+    </header>
+    <div id="statusMessage" class="status-message" hidden></div>
 
-      <div id="statusMessage" class="status-message" hidden></div>
-
-      <section id="dashboardPage" class="page active">
-        <section class="kpi-grid" aria-label="Monthly summary">
-          <article class="kpi-card income"><span>TOTAL INCOME</span><strong id="totalIncome">—</strong><small id="incomeMeta">Selected month</small></article>
-          <article class="kpi-card expense"><span>TOTAL EXPENSE</span><strong id="totalExpense">—</strong><small id="expenseMeta">Selected month</small></article>
-          <article class="kpi-card savings"><span>NET SAVINGS</span><strong id="netSavings">—</strong><small id="savingRate">—</small></article>
-          <article class="kpi-card budget"><span>MONTHLY BUDGET</span><strong>19.0M</strong><small>Planned total expense</small></article>
-          <article class="kpi-card available"><span>BUDGET LEFT</span><strong id="budgetLeft">—</strong><small id="budgetUsage">—</small></article>
-        </section>
-
-        <section class="dashboard-grid">
-          <article class="panel panel-wide">
-            <div class="panel-heading"><div><p class="panel-kicker">MONTHLY VIEW</p><h2>Income Trend by Person</h2></div></div>
-            <div id="incomeChart" class="chart chart-large"></div>
-          </article>
-
-          <article class="panel">
-            <div class="panel-heading"><div><p class="panel-kicker">SELECTED MONTH</p><h2>Expense Trend</h2></div></div>
-            <div id="expenseTrendChart" class="chart"></div>
-          </article>
-
-          <article class="panel category-panel">
-            <div class="panel-heading"><div><p class="panel-kicker">SHARE OF EXPENSE</p><h2>Expense by Category</h2></div></div>
-            <div id="categoryBars" class="category-bars"></div>
-            <div class="category-total"><span>Total</span><strong id="categoryTotal">—</strong></div>
-          </article>
-
-          <article class="panel panel-wide">
-            <div class="panel-heading"><div><p class="panel-kicker">BUDGET CONTROL</p><h2>Spending by Category</h2></div></div>
-            <div class="table-wrap">
-              <table>
-                <thead><tr><th>Category</th><th>Budget</th><th>Actual</th><th>% of Expense</th><th>Budget Left</th></tr></thead>
-                <tbody id="budgetTableBody"></tbody>
-              </table>
-            </div>
-          </article>
-
-          <article class="panel panel-wide">
-            <div class="panel-heading"><div><p class="panel-kicker">LATEST ACTIVITY</p><h2>Recent Transactions</h2></div><button class="text-button" data-go="transactions">View all</button></div>
-            <div class="table-wrap">
-              <table>
-                <thead><tr><th>Date</th><th>Type</th><th>Item</th><th>Category</th><th>Amount</th><th>Note</th></tr></thead>
-                <tbody id="recentTableBody"></tbody>
-              </table>
-            </div>
-          </article>
-        </section>
+    <section id="dashboardPage" class="page active">
+      <section class="kpi-grid">
+        <article class="kpi-card kpi-income"><span>TOTAL INCOME</span><strong id="totalIncome">—</strong><small id="incomeMeta">Selected month</small></article>
+        <article class="kpi-card kpi-expense"><span>TOTAL EXPENSE</span><strong id="totalExpense">—</strong><small id="expenseMeta">Selected month</small></article>
+        <article class="kpi-card kpi-savings"><span>NET SAVINGS</span><strong id="netSavings">—</strong><small id="savingRate">—</small></article>
+        <article class="kpi-card kpi-budget"><span>MONTHLY BUDGET</span><strong>19M</strong><small>Planned expense</small></article>
+        <article class="kpi-card kpi-left"><span>BUDGET LEFT</span><strong id="budgetLeft">—</strong><small id="budgetUsage">—</small></article>
       </section>
 
-      <section id="transactionsPage" class="page">
-        <article class="panel">
-          <div class="panel-heading transaction-heading">
-            <div><p class="panel-kicker">FULL HISTORY</p><h2>Transactions</h2></div>
-            <input id="transactionSearch" class="search-input" type="search" placeholder="Search item, category or note" />
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Date</th><th>Month</th><th>Type</th><th>Category</th><th>Item</th><th>Amount</th><th>Description</th></tr></thead>
-              <tbody id="allTransactionsBody"></tbody>
-            </table>
-          </div>
+      <section class="dashboard-grid">
+        <article class="panel panel-income">
+          <div class="panel-heading"><div><p class="panel-kicker">MONTHLY VIEW</p><h2>Income by Person</h2></div></div>
+          <div id="incomeChart" class="chart"></div>
+        </article>
+        <article class="panel panel-expense-trend">
+          <div class="panel-heading"><div><p class="panel-kicker">MONTHLY VIEW</p><h2>Expense Trend</h2></div></div>
+          <div id="expenseChart" class="chart"></div>
+        </article>
+        <article class="panel panel-category">
+          <div class="panel-heading"><div><p class="panel-kicker">SELECTED MONTH</p><h2>Expense by Category</h2></div></div>
+          <div id="categoryBars" class="category-bars"></div>
+          <div class="category-total"><span>Total Expense</span><strong id="categoryTotal">—</strong></div>
+        </article>
+        <article class="panel panel-budget">
+          <div class="panel-heading"><div><p class="panel-kicker">BUDGET CONTROL</p><h2>Spending by Category</h2></div></div>
+          <div class="table-wrap"><table><thead><tr><th>Category</th><th class="num">Budget</th><th class="num">Actual</th><th class="num">% of Expense</th><th class="num">Budget Left</th></tr></thead><tbody id="budgetTableBody"></tbody></table></div>
+        </article>
+        <article class="panel panel-recent">
+          <div class="panel-heading"><div><p class="panel-kicker">LATEST ACTIVITY</p><h2>Recent Transactions</h2></div><button class="text-button" data-go="transactions">View all</button></div>
+          <div class="table-wrap"><table><thead><tr><th>Date</th><th>Type</th><th>Item</th><th>Category</th><th class="num">Amount</th><th>Note</th></tr></thead><tbody id="recentTableBody"></tbody></table></div>
         </article>
       </section>
+    </section>
 
-      <section id="savingsPage" class="page">
-        <section class="savings-summary">
-          <article><span>INCOME</span><strong id="savingIncome">—</strong></article>
-          <article><span>EXPENSE</span><strong id="savingExpense">—</strong></article>
-          <article><span>AVAILABLE TO ALLOCATE</span><strong id="savingAvailable">—</strong></article>
-        </section>
-        <section class="savings-grid">
-          <article class="panel">
-            <div class="panel-heading"><div><p class="panel-kicker">MONTHLY PLAN</p><h2>Savings Allocation</h2></div></div>
-            <div id="allocationList" class="allocation-list"></div>
-          </article>
-          <article class="panel panel-wide">
-            <div class="panel-heading"><div><p class="panel-kicker">CASH FLOW</p><h2>Monthly Waterfall</h2></div></div>
-            <div id="waterfallChart" class="chart chart-large"></div>
-          </article>
-          <article class="panel savings-history-panel">
-            <div class="panel-heading"><div><p class="panel-kicker">TREND</p><h2>Net Savings by Month</h2></div></div>
-            <div id="savingsTrendChart" class="chart"></div>
-          </article>
-        </section>
+    <section id="transactionsPage" class="page">
+      <article class="panel">
+        <div class="panel-heading transaction-heading"><div><p class="panel-kicker">FULL HISTORY</p><h2>Transactions</h2></div><input id="transactionSearch" class="search-input" type="search" placeholder="Search item, category or note" /></div>
+        <div class="table-wrap"><table><thead><tr><th>Date</th><th>Month</th><th>Type</th><th>Category</th><th>Item</th><th class="num">Amount</th><th>Description</th></tr></thead><tbody id="allTransactionsBody"></tbody></table></div>
+      </article>
+    </section>
+
+    <section id="savingsPage" class="page">
+      <section class="savings-summary">
+        <article><span>INCOME</span><strong id="savingIncome">—</strong></article>
+        <article><span>EXPENSE</span><strong id="savingExpense">—</strong></article>
+        <article><span>AVAILABLE TO ALLOCATE</span><strong id="savingAvailable">—</strong></article>
       </section>
-    </main>
-  </div>
+      <section class="savings-grid">
+        <article class="panel"><div class="panel-heading"><div><p class="panel-kicker">MONTHLY PLAN</p><h2>Savings Allocation</h2></div></div><div id="allocationList" class="allocation-list"></div></article>
+        <article class="panel"><div class="panel-heading"><div><p class="panel-kicker">CASH FLOW</p><h2>Monthly Waterfall</h2></div></div><div id="waterfallChart" class="chart"></div></article>
+        <article class="panel savings-history"><div class="panel-heading"><div><p class="panel-kicker">TREND</p><h2>Net Savings by Month</h2></div></div><div id="savingsTrendChart" class="chart"></div></article>
+      </section>
+    </section>
+  </main>
+</div>
 </body>
 </html>
