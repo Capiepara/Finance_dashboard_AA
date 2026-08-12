@@ -1,20 +1,23 @@
-# Personal Finance Dashboard V3
+# Personal Finance Dashboard V4
 
-Static GitHub Pages dashboard with no JavaScript chart/parser CDN dependencies.
+Static GitHub Pages dashboard connected directly to the Google Sheets `Transaction` tab.
 
-## Upload to GitHub
-Upload these files to the repository root:
-- index.html
-- styles.css
-- app.js
-- README.md
+## V4 changes
+- Live Google Sheets only (no stale snapshot fallback)
+- Data labels on income, expense and waterfall charts
+- Expense by Item pie chart with percentage labels and amount legend
+- Larger Expense by Category view
+- Independent month filter on Transactions
+- Independent month filter on Savings
+- Savings waterfall by selected month
+- Savings allocation table by category across months
+- Nunito typography, square corners, Eggshell / Burnt Peach / Twilight Indigo / Muted Teal / Apricot palette
 
-Then enable Settings > Pages > Deploy from a branch > main > /(root).
+## GitHub Pages
+Upload these four files to the repository root:
+- `index.html`
+- `styles.css`
+- `app.js`
+- `README.md`
 
-## Data
-The app first tries to read the Transaction sheet from Google Sheets. If live access fails, it automatically shows the embedded CSV snapshot so the dashboard never stays blank.
-
-Current budget settings in app.js:
-- Total: 19M
-- Meal: 4M
-- Unexpected: 1M
+Then enable GitHub Pages from the `main` branch and `/ (root)`.
