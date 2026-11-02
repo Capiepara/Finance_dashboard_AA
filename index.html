@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=da0a5790" />
-  <script defer src="app.js?v=da0a5790"></script>
+  <link rel="stylesheet" href="styles.css?v=54adbb69" />
+  <script defer src="app.js?v=54adbb69"></script>
 </head>
 <body>
 <div class="app-shell">
@@ -19,6 +19,7 @@
       <button class="nav-item active" data-page="dashboard" data-title="Dashboard">Dashboard</button>
       <button class="nav-item" data-page="transactions" data-title="Transactions">Transactions</button>
       <button class="nav-item" data-page="savings" data-title="Savings">Savings</button>
+      <button class="nav-item" data-page="plan" data-title="Goal plan">Goal plan</button>
       <button class="nav-item" data-page="check" data-title="Data check">Data check <span id="issueCount" class="nav-count" hidden></span></button>
     </nav>
     <div class="sidebar-footer">
@@ -75,6 +76,15 @@
     </section>
 
     <section id="transactionsPage" class="page">
+      <section class="kpi-grid tx-summary">
+        <article class="kpi-card kpi-income"><span>INCOME</span><strong id="txIncome">—</strong><small>For the month and search below</small></article>
+        <article class="kpi-card kpi-expense"><span>EXPENSE</span><strong id="txExpense">—</strong><small>For the month and search below</small></article>
+        <article class="kpi-card kpi-savings"><span>INCOME − EXPENSE</span><strong id="txNet">—</strong><small id="txNetMeta">—</small></article>
+        <article class="kpi-card kpi-budget"><span>TRANSACTIONS</span><strong id="txCount">—</strong><small id="txCountMeta">—</small></article>
+        <article class="kpi-card kpi-left"><span>AVG PER EXPENSE</span><strong id="txAvg">—</strong><small>Expense ÷ number of expense rows</small></article>
+        <article class="kpi-card kpi-big"><span>BIGGEST EXPENSE</span><strong id="txBiggest">—</strong><small id="txBiggestMeta">—</small></article>
+      </section>
+      <div id="txCategorySplit" class="split-row"></div>
       <article class="panel">
         <div class="panel-heading transaction-heading">
           <div><p class="panel-kicker">FULL HISTORY</p><h2>Transactions</h2></div>
@@ -106,8 +116,49 @@
       <section class="savings-grid">
         <article class="panel allocation-panel"><div class="panel-heading"><div><p class="panel-kicker">FROM THE SAVING TAB</p><h2>Savings Buckets</h2></div></div><div id="allocationList" class="allocation-list"></div></article>
         <article class="panel waterfall-panel"><div class="panel-heading"><div><p class="panel-kicker">CASH FLOW</p><h2>Selected Period Waterfall</h2></div><div class="legend-inline"><span><i class="dot increase"></i>Increase</span><span><i class="dot decrease"></i>Decrease</span><span><i class="dot total"></i>Total</span></div></div><div id="waterfallChart" class="chart chart-lg"></div></article>
+        <article class="panel"><div class="panel-heading"><div><p class="panel-kicker">FLUCTUATION</p><h2>Monthly Result: Income − Expense</h2></div></div><div id="netChart" class="chart chart-lg"></div></article>
+        <article class="panel"><div class="panel-heading"><div><p class="panel-kicker">SAVING TAB</p><h2>Savings Balance Over Time</h2></div></div><div id="balanceChart" class="chart chart-lg"></div></article>
+        <article class="panel"><div class="panel-heading"><div><p class="panel-kicker">SAVING TAB</p><h2>Deposits vs Withdrawals</h2></div></div><div id="flowChart" class="chart chart-lg"></div></article>
+        <article class="panel"><div class="panel-heading"><div><p class="panel-kicker">SAVING TAB · SAME SCALE</p><h2>Balance by Bucket</h2></div></div><div id="bucketMultiples" class="multiples"></div></article>
         <article class="panel savings-history"><div class="panel-heading"><div><p class="panel-kicker">BY MONTH</p><h2>Income − Expense vs Money Moved to Savings</h2></div></div><div class="table-wrap"><table id="savingsTable"><thead id="savingsTableHead"></thead><tbody id="savingsTableBody"></tbody></table></div><p id="savingsTableNote" class="panel-note"></p></article>
       </section>
+    </section>
+
+
+    <section id="planPage" class="page">
+      <div id="planEmpty" class="panel empty-state panel-pad" hidden>At least 3 full months of data are needed for the plan.</div>
+      <div id="planBody">
+        <div class="plan-settings panel">
+          <label>GOAL (MILLION VND)<input id="planGoalInput" type="number" min="1" step="10"></label>
+          <label>YEARS<input id="planYearsInput" type="number" min="1" max="30" step="1"></label>
+          <label>SAVINGS RETURN % / YEAR<input id="planReturnInput" type="number" min="0" max="20" step="0.5"></label>
+          <div class="plan-goal"><span>TARGET</span><strong id="planGoalLabel">—</strong></div>
+        </div>
+        <p id="planVerdict" class="plan-verdict"></p>
+        <section class="kpi-grid">
+          <article class="kpi-card kpi-budget"><span>SAVED SO FAR</span><strong id="planStart">—</strong><small>Balance in the saving tab</small></article>
+          <article class="kpi-card kpi-income"><span>NEEDED</span><strong id="planNeed">—</strong><small id="planNeedMeta">a month</small></article>
+          <article class="kpi-card kpi-savings"><span>YOU SAVE NOW</span><strong id="planNow">—</strong><small id="planNowMeta">—</small></article>
+          <article class="kpi-card kpi-expense"><span>GAP PER MONTH</span><strong id="planGap">—</strong><small>Needed − saved now</small></article>
+          <article class="kpi-card kpi-left"><span>CHANCE TO REACH GOAL</span><strong id="planProbPlan">—</strong><small id="planProbMeta">—</small><em id="planProbBase" hidden></em></article>
+        </section>
+        <section class="plan-grid">
+          <article class="panel plan-chart-panel"><div class="panel-heading"><div><p class="panel-kicker">STATISTICAL MODEL · 1,000 SIMULATIONS</p><h2>Projected Savings Balance</h2></div></div><div id="planChart" class="chart chart-xl"></div>
+            <p class="panel-note">Each simulated month replays a real past month (income and spending together), so surprises like Aug–Sep happen again at the same rate. The band shows where 80% of simulations end up.</p></article>
+          <article class="panel plan-levers"><div class="panel-heading"><div><p class="panel-kicker">WHAT IF</p><h2>Your Plan</h2></div><div class="lever-buttons"><button id="planSuggest" class="button" type="button">Use suggested plan</button><button id="planReset" class="text-button" type="button">Reset</button></div></div>
+            <div class="lever"><label for="lev_unexpected">Unexpected spending <strong id="lev_unexpected_val"></strong></label><input id="lev_unexpected" type="range" min="0" max="60" step="5"><small id="lev_unexpected_meta"></small></div>
+            <div class="lever"><label for="lev_meal">Meal <strong id="lev_meal_val"></strong></label><input id="lev_meal" type="range" min="0" max="40" step="5"><small id="lev_meal_meta"></small></div>
+            <div class="lever"><label for="lev_fixed">Fixed costs <strong id="lev_fixed_val"></strong></label><input id="lev_fixed" type="range" min="0" max="20" step="5"><small id="lev_fixed_meta"></small></div>
+            <div class="lever"><label for="lev_income">Income growth <strong id="lev_income_val"></strong></label><input id="lev_income" type="range" min="0" max="15" step="1"><small id="lev_income_meta"></small></div>
+            <p id="planSuggestNote" class="panel-note"></p>
+          </article>
+          <article class="panel plan-actions-panel"><div class="panel-heading"><div><p class="panel-kicker">CALL TO ACTION</p><h2>What to Do</h2></div></div><ol id="planActions" class="plan-actions"></ol></article>
+          <article class="panel"><div class="panel-heading"><div><p class="panel-kicker">WHERE THE SWINGS COME FROM</p><h2>Expense by Category per Month</h2></div></div><div id="planSwingChart" class="chart chart-lg"></div></article>
+          <article class="panel plan-stats"><div class="panel-heading"><div><p class="panel-kicker">STATISTICS</p><h2>Monthly Figures: Now vs Plan</h2></div></div>
+            <div class="table-wrap"><table><thead><tr><th>Line</th><th class="num">Average</th><th class="num">Typical (median)</th><th class="num">Swing (±SD)</th><th class="num">Worst month</th><th class="num">Budget</th><th class="num">Plan target</th></tr></thead><tbody id="planStatsBody"></tbody></table></div>
+            <p id="planStatsNote" class="panel-note"></p></article>
+        </section>
+      </div>
     </section>
 
     <section id="checkPage" class="page">
