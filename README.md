@@ -10,8 +10,12 @@ Live site: https://capiepara.github.io/Finance_dashboard_AA/
 - The top bar shows `Live · updated HH:MM`. If a background reload fails, the current data stays on screen and the status shows `Offline`.
 - The sheet must stay shared as "Anyone with the link can view".
 
+## V5.4 changes
+- Navy / slate theme: Smart Blue, Steel Azure, Regal Navy, Prussian Blue, Twilight Indigo, Blue Slate, Slate Grey, Cool Steel. Chart order Smart Blue → Cool Steel → Regal Navy → Blue Slate (neighbours checked for color-blind safety); coral only marks money going out / negatives
+- Square bar ends
+
 ## V5.3 changes
-- New green–blue theme (Willow Green → Baltic Blue). Chart colors checked for color-blind safety; coral only marks money going out / negatives
+- Green–blue theme (replaced in V5.4)
 - **Goal plan** page: savings goal (default 500M in 5 years, 5% return), statistical model (1,000 bootstrap simulations of past months), what-if sliders, suggested plan (≥70% chance), call-to-action list and a statistics table
 - Savings page: monthly result (income − expense), balance over time, deposits vs withdrawals, balance per bucket
 - Transactions page: totals for the current month/search (income, expense, net, count, average, biggest expense) and a split by category

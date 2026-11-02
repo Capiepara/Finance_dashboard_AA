@@ -14,9 +14,10 @@ const CONFIG={
   goal:{amount:500000000,years:5,annualReturn:5}   // savings goal; editable on the Goal plan page
 };
 
-// Colors from the green–blue palette. Chart slots were checked for color-blind safety (in this order).
+// Navy / slate palette. Slot order keeps neighbours apart for color-blind readers (checked: adjacent ΔE ≥ 14.9).
+// The greys are low-chroma by design, so every chart also has a legend, labels and hover values.
 // Coral is used only for money going out / negative values.
-const COLORS={s1:"#1E6091",s2:"#76C893",s3:"#168AAD",s4:"#52B69A",neg:"#D1603D",other:"#AAB8BD"};
+const COLORS={s1:"#0466C8",s2:"#979DAC",s3:"#023E7D",s4:"#5C677D",neg:"#D1603D",other:"#D3D8E0",ref:"#7D8597"};
 const CATEGORICAL=[COLORS.s1,COLORS.s2,COLORS.s3,COLORS.s4];
 const ENTITY={Albert:COLORS.s1,Annie:COLORS.s2,Fixed:COLORS.s1,Meal:COLORS.s2,Unexpected:COLORS.s3,Uncategorized:COLORS.other,Other:COLORS.other};
 function entityColor(name,i=0){return ENTITY[name]||CATEGORICAL[i%CATEGORICAL.length]}
@@ -594,7 +595,7 @@ function barChart(el,labels,series,opts={}){
     let base=0;
     series.forEach((ser,j)=>{const v=ser.data[i]||0;if(v<=0)return;const hh=v/max*ph,y=T+ph-(base+v)/max*ph,gap=base>0?2:0;
       svg.appendChild(svgEl("path",{d:barPath(L+i*gw+(gw-bw)/2,y,bw,Math.max(hh-gap,0),true),fill:ser.color,"data-tip":`${lab} · ${ser.name}: ${formatMoney(v)}`}));
-      if(opts.segmentLabels!==false&&hh>20)addText(svg,formatMoney(v),L+i*gw+gw/2,y+hh/2+4,"data-label-light","middle");base+=v});
+      if(opts.segmentLabels!==false&&hh>20)addText(svg,formatMoney(v),L+i*gw+gw/2,y+hh/2+4,labelOn(ser.color),"middle");base+=v});
     if(totals[i]>0)addText(svg,formatMoney(totals[i]),L+i*gw+gw/2,T+ph-totals[i]/max*ph-8,"data-label","middle");
   });
   xLabels(svg,labels,i=>L+i*gw+gw/2,h);
@@ -654,14 +655,14 @@ function fanChart(el,labels,plan,base50,goal){
   gridY(svg,L,R,w,T,ph,sc);
   if(lo<0)svg.appendChild(svgEl("line",{x1:L,y1:y(0),x2:w-R,y2:y(0),class:"axis-line"}));
   const line=a=>a.map((v,i)=>`${xAt(i)},${y(v)}`).join(" ");
-  svg.appendChild(svgEl("polygon",{points:line(plan.p90)+" "+plan.p10.map((v,i)=>`${xAt(i)},${y(v)}`).reverse().join(" "),fill:COLORS.s3,"fill-opacity":.16}));
+  svg.appendChild(svgEl("polygon",{points:line(plan.p90)+" "+plan.p10.map((v,i)=>`${xAt(i)},${y(v)}`).reverse().join(" "),fill:COLORS.s1,"fill-opacity":.14}));
   const gy=y(goal);svg.appendChild(svgEl("line",{x1:L,y1:gy,x2:w-R,y2:gy,class:"goal-line"}));addText(svg,`Goal ${formatMoney(goal)}`,L+6,gy-6,"ref-label","start");
-  svg.appendChild(svgEl("polyline",{points:line(base50),fill:"none",stroke:COLORS.other,"stroke-width":2}));
+  svg.appendChild(svgEl("polyline",{points:line(base50),fill:"none",stroke:COLORS.ref,"stroke-width":2}));
   svg.appendChild(svgEl("polyline",{points:line(plan.p50),fill:"none",stroke:COLORS.s1,"stroke-width":2.5}));
   const n=labels.length-1;
   addText(svg,formatMoney(plan.p50[n]),xAt(n),y(plan.p50[n])-8,"data-label","end");
   addText(svg,formatMoney(base50[n]),xAt(n),y(base50[n])+16,"axis-text","end");
-  legend(svg,[{name:"With plan (typical)",color:COLORS.s1},{name:"80% of outcomes",color:"rgba(22,138,173,.35)"},{name:"No change (typical)",color:COLORS.other}],L,16);
+  legend(svg,[{name:"With plan (typical)",color:COLORS.s1},{name:"80% of outcomes",color:"rgba(4,102,200,.3)"},{name:"No change (typical)",color:COLORS.ref}],L,16);
   xLabels(svg,labels,xAt,h);
   // crosshair hover
   const cross=svgEl("line",{y1:T,y2:T+ph,class:"crosshair",visibility:"hidden"});svg.appendChild(cross);
@@ -676,8 +677,10 @@ function pieChart(el,data){
   data.forEach((x,i)=>{const a=x.amount/total*Math.PI*2,end=angle+a-(data.length>1?0.0001:0),x1=cx+r*Math.cos(angle),y1=cy+r*Math.sin(angle),x2=cx+r*Math.cos(end),y2=cy+r*Math.sin(end),large=a>Math.PI?1:0;
     const d=data.length===1?`M ${cx-r} ${cy} A ${r} ${r} 0 1 1 ${cx+r} ${cy} A ${r} ${r} 0 1 1 ${cx-r} ${cy} Z`:`M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} Z`;
     svg.appendChild(svgEl("path",{d,fill:pieColor(x,i),stroke:"#fff","stroke-width":2,"data-tip":`${x.item}: ${formatMoney(x.amount)} (${x.percent.toFixed(1)}%)`}));
-    const mid=angle+a/2,lr=r*.66;if(x.percent>=6)addText(svg,`${x.percent.toFixed(1)}%`,cx+lr*Math.cos(mid),cy+lr*Math.sin(mid)+4,x.item==="Others"?"data-label":"data-label-light","middle");angle+=a;});
+    const mid=angle+a/2,lr=r*.66;if(x.percent>=6)addText(svg,`${x.percent.toFixed(1)}%`,cx+lr*Math.cos(mid),cy+lr*Math.sin(mid)+4,labelOn(pieColor(x,i)),"middle");angle+=a;});
 }
+// Dark text on the light fills (Cool Steel, light grey), white text on the dark ones.
+function labelOn(color){return[COLORS.s2,COLORS.other].includes(color)?"data-label":"data-label-light"}
 function pieColor(x,i){return x.item==="Others"?COLORS.other:CATEGORICAL[i%CATEGORICAL.length]}
 function waterfallChart(el,income,expense,saving){
   const s=setupSVG(el);if(!s)return;const{svg,w,h}=s,L=52,R=18,T=40,B=48,pw=w-L-R,ph=h-T-B;const sc=niceScale(Math.min(saving,0)*1.1,Math.max(income,saving,1)*1.1),max=sc.hi,min=sc.lo,range=max-min;
