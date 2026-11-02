@@ -571,17 +571,17 @@ document.addEventListener("mousemove",e=>{
 
 function svgEl(tag,attrs={}){const e=document.createElementNS("http://www.w3.org/2000/svg",tag);for(const[k,v]of Object.entries(attrs))e.setAttribute(k,v);return e}
 function setupSVG(el){el.innerHTML="";if(!el.clientWidth||!el.clientHeight)return null;const svg=svgEl("svg",{viewBox:`0 0 ${el.clientWidth} ${el.clientHeight}`,class:"svg-chart",preserveAspectRatio:"none"});el.appendChild(svg);return{svg,w:el.clientWidth,h:el.clientHeight}}
-// Bar with only its data end rounded (top for up bars, bottom for down bars).
-function barPath(x,y,w,h,up=true,r=4){if(h<=0)return"";r=Math.min(r,w/2,h);return up
+// Bar path with square corners (r=0). A radius can still be passed if ever wanted.
+function barPath(x,y,w,h,up=true,r=0){if(h<=0)return"";r=Math.min(r,w/2,h);return up
   ?`M${x},${y+h}V${y+r}Q${x},${y} ${x+r},${y}H${x+w-r}Q${x+w},${y} ${x+w},${y+r}V${y+h}Z`
   :`M${x},${y}H${x+w}V${y+h-r}Q${x+w},${y+h} ${x+w-r},${y+h}H${x+r}Q${x},${y+h} ${x},${y+h-r}Z`}
 // Round axis steps (1, 2, 2.5, 5 × 10ⁿ) so ticks read 0 / 10M / 20M instead of odd values.
 function niceScale(lo,hi,count=4){if(hi<=lo)hi=lo+1;const raw=(hi-lo)/count,mag=Math.pow(10,Math.floor(Math.log10(raw))),f=raw/mag,step=(f<=1?1:f<=2?2:f<=2.5?2.5:f<=5?5:10)*mag;return{lo:Math.floor(lo/step)*step,hi:Math.ceil(hi/step)*step,step}}
 function gridY(svg,L,R,w,T,ph,sc){const n=Math.max(1,Math.round((sc.hi-sc.lo)/sc.step));for(let k=0;k<=n;k++){const v=sc.hi-sc.step*k,y=T+ph*k/n;svg.appendChild(svgEl("line",{x1:L,y1:y,x2:w-R,y2:y,class:"grid-line"}));addText(svg,axisMoney(v),L-8,y+4,"axis-text","end")}}
-function legend(svg,items,x,y){let lx=x;items.forEach(it=>{svg.appendChild(svgEl("rect",{x:lx,y:y-9,width:10,height:10,rx:2,fill:it.color}));addText(svg,it.name,lx+15,y,"legend-text","start");lx+=it.name.length*7+34})}
-// Month labels under the axis, thinned so they never overlap (about 52px per label).
+function legend(svg,items,x,y){let lx=x;items.forEach(it=>{svg.appendChild(svgEl("rect",{x:lx,y:y-9,width:10,height:10,fill:it.color}));addText(svg,it.name,lx+15,y,"legend-text","start");lx+=it.name.length*7+34})}
+// Month labels under the axis, thinned so they never overlap (about 42px per label).
 function xLabels(svg,labels,xAt,h){
-  const n=labels.length,span=n>1?Math.abs(xAt(n-1)-xAt(0)):0,fit=Math.max(2,Math.floor(span/52)+1),every=Math.max(1,Math.ceil(n/fit)),last=n-1;
+  const n=labels.length,span=n>1?Math.abs(xAt(n-1)-xAt(0)):0,fit=Math.max(2,Math.floor(span/42)+1),every=Math.max(1,Math.ceil(n/fit)),last=n-1;
   labels.forEach((lab,i)=>{if((i%every===0&&last-i>=every*.9)||i===last)addText(svg,lab,xAt(i),h-14,"axis-text",n>1&&i===last&&every>1?"end":"middle")});
 }
 
@@ -591,9 +591,9 @@ function barChart(el,labels,series,opts={}){
   gridY(svg,L,R,w,T,ph,sc);
   const gw=pw/labels.length,bw=Math.min(40,gw*.58);
   labels.forEach((lab,i)=>{
-    let base=0;const top=series.map((x,j)=>(x.data[i]||0)>0?j:-1).filter(j=>j>=0).pop();
+    let base=0;
     series.forEach((ser,j)=>{const v=ser.data[i]||0;if(v<=0)return;const hh=v/max*ph,y=T+ph-(base+v)/max*ph,gap=base>0?2:0;
-      svg.appendChild(svgEl("path",{d:barPath(L+i*gw+(gw-bw)/2,y,bw,Math.max(hh-gap,0),true,j===top?4:0),fill:ser.color,"data-tip":`${lab} · ${ser.name}: ${formatMoney(v)}`}));
+      svg.appendChild(svgEl("path",{d:barPath(L+i*gw+(gw-bw)/2,y,bw,Math.max(hh-gap,0),true),fill:ser.color,"data-tip":`${lab} · ${ser.name}: ${formatMoney(v)}`}));
       if(opts.segmentLabels!==false&&hh>20)addText(svg,formatMoney(v),L+i*gw+gw/2,y+hh/2+4,"data-label-light","middle");base+=v});
     if(totals[i]>0)addText(svg,formatMoney(totals[i]),L+i*gw+gw/2,T+ph-totals[i]/max*ph-8,"data-label","middle");
   });
