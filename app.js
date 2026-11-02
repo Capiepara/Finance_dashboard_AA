@@ -3,6 +3,7 @@
 const CONFIG={
   sheetId:"1gAr4O_sTA6L68ThUHqcrmiruMe2aP_Oh39khKwVcOt8",
   gid:"1116776327",
+  autoRefreshMinutes:5,
   totalBudget:19000000,
   categoryBudgets:{Fixed:14000000,Meal:4000000,Unexpected:1000000},
   allocations:[["Investment",15],["Kids",10],["Education",25],["Emergency",20],["Saving",30]],
@@ -12,20 +13,35 @@ const CONFIG={
 let transactions=[];
 let selectedMonth="";
 let transactionMonth="all";
-let savingsMonth="";
+let selectedSavingsMonths=[];
+let isLoading=false;
+let lastLoadedAt=0;
 const $=id=>document.getElementById(id);
 
 window.addEventListener("DOMContentLoaded",()=>{
   document.querySelectorAll(".nav-item").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
   document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.go)));
-  $("refreshButton").addEventListener("click",loadData);
+  $("refreshButton").addEventListener("click",()=>loadData());
   $("monthSelect").addEventListener("change",e=>{selectedMonth=e.target.value;renderDashboard();renderVisibleCharts();});
   $("transactionMonthSelect").addEventListener("change",e=>{transactionMonth=e.target.value;renderAllTransactions();});
-  $("savingsMonthSelect").addEventListener("change",e=>{savingsMonth=e.target.value;renderSavings();renderVisibleCharts();});
+  $("savingsMonthMenu").addEventListener("change",handleSavingsMonthChange);
+  $("savingsSelectAll").addEventListener("click",()=>setAllSavingsMonths(true));
+  $("savingsClearAll").addEventListener("click",()=>setAllSavingsMonths(false));
   $("transactionSearch").addEventListener("input",renderAllTransactions);
   window.addEventListener("resize",debounce(renderVisibleCharts,120));
   loadData();
+  startAutoRefresh();
 });
+
+// Reload the sheet on a timer while the tab is visible, and when the user comes back to the tab.
+function startAutoRefresh(){
+  const ms=CONFIG.autoRefreshMinutes*60*1000;
+  if(!ms) return;
+  setInterval(()=>{if(!document.hidden) loadData({silent:true});},ms);
+  document.addEventListener("visibilitychange",()=>{
+    if(!document.hidden&&Date.now()-lastLoadedAt>60*1000) loadData({silent:true});
+  });
+}
 
 function showPage(page){
   document.querySelectorAll(".nav-item").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
@@ -37,8 +53,14 @@ function showPage(page){
   setTimeout(renderVisibleCharts,20);
 }
 
-async function loadData(){
-  setDataStatus("Loading data…","");hideMessage();
+async function loadData({silent=false}={}){
+  if(isLoading) return;
+  isLoading=true;
+  try{await fetchAndRender(silent);}finally{isLoading=false;}
+}
+
+async function fetchAndRender(silent){
+  if(!silent){setDataStatus("Loading data…","");hideMessage();}
   const urls=[
     `https://docs.google.com/spreadsheets/d/${CONFIG.sheetId}/gviz/tq?tqx=out:csv&gid=${CONFIG.gid}&_=${Date.now()}`,
     `https://docs.google.com/spreadsheets/d/${CONFIG.sheetId}/export?format=csv&gid=${CONFIG.gid}&_=${Date.now()}`
@@ -56,11 +78,14 @@ async function loadData(){
     }catch(e){lastError=e;console.warn("Sheet endpoint failed",e);}
   }
   if(!parsed.length){
+    // A failed background refresh keeps the data already on screen.
+    if(silent&&transactions.length){setDataStatus(`Offline · last update ${formatTime(lastLoadedAt)}`,"error");console.warn(lastError);return;}
     transactions=[];setDataStatus("Google Sheets unavailable","error");
     showMessage("Unable to load live Google Sheets data. Confirm that the sheet is shared for viewing, then press Refresh.");
     console.error(lastError);populateFilters();renderAll();return;
   }
-  transactions=parsed;setDataStatus("Live Google Sheets","live");
+  transactions=parsed;lastLoadedAt=Date.now();hideMessage();
+  setDataStatus(`Live · updated ${formatTime(lastLoadedAt)}`,"live");
   populateFilters();renderAll();
 }
 
@@ -104,16 +129,47 @@ function availableMonths(){return[...new Set(transactions.map(r=>r.month))].sort
 function populateFilters(){
   const months=availableMonths();
   if(!months.length){
-    ["monthSelect","transactionMonthSelect","savingsMonthSelect"].forEach(id=>$(id).innerHTML="<option>No data</option>");return;
+    ["monthSelect","transactionMonthSelect"].forEach(id=>$(id).innerHTML="<option>No data</option>");
+    $("savingsMonthMenu").innerHTML='<div class="empty-filter">No data</div>';
+    $("savingsMonthSummary").textContent="No data";
+    return;
   }
   if(!selectedMonth||!months.includes(selectedMonth))selectedMonth=months[months.length-1];
-  if(!savingsMonth||!months.includes(savingsMonth))savingsMonth=selectedMonth;
+  selectedSavingsMonths=selectedSavingsMonths.filter(m=>months.includes(m));
+  if(!selectedSavingsMonths.length)selectedSavingsMonths=[...months];
   $("monthSelect").innerHTML=months.slice().reverse().map(m=>`<option value="${m}" ${m===selectedMonth?"selected":""}>${formatMonth(m)}</option>`).join("");
   $("transactionMonthSelect").innerHTML=`<option value="all">All months</option>`+months.slice().reverse().map(m=>`<option value="${m}">${formatMonth(m)}</option>`).join("");
   $("transactionMonthSelect").value=transactionMonth;
-  $("savingsMonthSelect").innerHTML=months.slice().reverse().map(m=>`<option value="${m}" ${m===savingsMonth?"selected":""}>${formatMonth(m)}</option>`).join("");
+  renderSavingsMonthMenu();
+}
+function renderSavingsMonthMenu(){
+  const months=availableMonths().slice().reverse();
+  $("savingsMonthMenu").innerHTML=months.map(m=>`<label class="month-check"><input type="checkbox" value="${m}" ${selectedSavingsMonths.includes(m)?"checked":""}><span>${formatMonth(m)}</span></label>`).join("");
+  updateSavingsMonthSummary();
+}
+function updateSavingsMonthSummary(){
+  const all=availableMonths();
+  const count=selectedSavingsMonths.length;
+  let label="Select months";
+  if(count===all.length&&all.length) label="All months";
+  else if(count===1) label=formatMonth(selectedSavingsMonths[0]);
+  else if(count>1) label=`${count} months selected`;
+  $("savingsMonthSummary").textContent=label;
+}
+function handleSavingsMonthChange(e){
+  if(!e.target.matches('input[type="checkbox"]'))return;
+  const value=e.target.value;
+  if(e.target.checked){if(!selectedSavingsMonths.includes(value))selectedSavingsMonths.push(value)}
+  else selectedSavingsMonths=selectedSavingsMonths.filter(m=>m!==value);
+  selectedSavingsMonths.sort();
+  updateSavingsMonthSummary();renderSavings();renderVisibleCharts();
+}
+function setAllSavingsMonths(selectAll){
+  selectedSavingsMonths=selectAll?[...availableMonths()]:[];
+  renderSavingsMonthMenu();renderSavings();renderVisibleCharts();
 }
 function rowsForMonth(month){return transactions.filter(r=>r.month===month)}
+function rowsForSavingsSelection(){return transactions.filter(r=>selectedSavingsMonths.includes(r.month))}
 function selectedRows(){return rowsForMonth(selectedMonth)}
 function sum(rows,type){return rows.filter(r=>!type||r.type===type).reduce((a,r)=>a+r.amount,0)}
 function renderAll(){renderDashboard();renderAllTransactions();renderSavings();renderVisibleCharts()}
@@ -160,17 +216,18 @@ function renderAllTransactions(){
 }
 
 function renderSavings(){
-  const rows=rowsForMonth(savingsMonth),income=sum(rows,"Income"),expense=sum(rows,"Expense"),available=income-expense;
+  const rows=rowsForSavingsSelection(),income=sum(rows,"Income"),expense=sum(rows,"Expense"),available=income-expense;
   $("savingIncome").textContent=formatMoney(income);$("savingExpense").textContent=formatMoney(expense);$("savingAvailable").textContent=formatMoney(available);$("savingAvailable").className=available<0?"negative":"positive";
   $("allocationList").innerHTML=CONFIG.allocations.map(([name,p],i)=>`<div class="allocation-row"><span class="allocation-name"><span style="display:inline-block;width:9px;height:9px;background:${CONFIG.palette[i%CONFIG.palette.length]};margin-right:8px"></span>${name}</span><span class="allocation-percent">${p}%</span><strong class="allocation-value">${formatMoney(Math.max(available,0)*p/100)}</strong></div>`).join("");
   renderSavingsTable();
 }
 function savingsByMonth(){return monthlySummary().map(([m,x])=>({month:m,net:x.income-x.expense,income:x.income,expense:x.expense}))}
 function renderSavingsTable(){
-  const all=savingsByMonth();const cutoff=all.findIndex(x=>x.month===savingsMonth);const shown=(cutoff>=0?all.slice(0,cutoff+1):all).slice(-8);
-  $("savingsTableHead").innerHTML=`<tr><th>Category</th><th class="num">Target %</th>${shown.map(x=>`<th class="num">${formatMonthShort(x.month)}</th>`).join("")}</tr>`;
-  const body=CONFIG.allocations.map(([name,p])=>`<tr><td><strong>${name}</strong></td><td class="num">${p}%</td>${shown.map(x=>`<td class="num">${formatMoney(Math.max(x.net,0)*p/100)}</td>`).join("")}</tr>`).join("");
-  const total=`<tr><td><strong>TOTAL</strong></td><td class="num"><strong>100%</strong></td>${shown.map(x=>`<td class="num"><strong>${formatMoney(Math.max(x.net,0))}</strong></td>`).join("")}</tr>`;
+  const shown=savingsByMonth().filter(x=>selectedSavingsMonths.includes(x.month));
+  $("savingsTableHead").innerHTML=`<tr><th>Category</th><th class="num">Target %</th>${shown.map(x=>`<th class="num">${formatMonthShort(x.month)}</th>`).join("")}<th class="num">Selected Total</th></tr>`;
+  const body=CONFIG.allocations.map(([name,p])=>{const total=shown.reduce((a,x)=>a+Math.max(x.net,0)*p/100,0);return `<tr><td><strong>${name}</strong></td><td class="num">${p}%</td>${shown.map(x=>`<td class="num">${formatMoney(Math.max(x.net,0)*p/100)}</td>`).join("")}<td class="num"><strong>${formatMoney(total)}</strong></td></tr>`}).join("");
+  const selectedTotal=shown.reduce((a,x)=>a+Math.max(x.net,0),0);
+  const total=`<tr><td><strong>TOTAL</strong></td><td class="num"><strong>100%</strong></td>${shown.map(x=>`<td class="num"><strong>${formatMoney(Math.max(x.net,0))}</strong></td>`).join("")}<td class="num"><strong>${formatMoney(selectedTotal)}</strong></td></tr>`;
   $("savingsTableBody").innerHTML=body+total;
 }
 
@@ -180,7 +237,7 @@ function renderVisibleCharts(){
 }
 function renderIncomeChart(){const s=monthlySummary();barChart($("incomeChart"),s.map(([m])=>formatMonthShort(m)),[{name:"Albert",color:CONFIG.palette[0],data:s.map(([,x])=>x.Albert)},{name:"Annie",color:CONFIG.palette[2],data:s.map(([,x])=>x.Annie)}])}
 function renderExpenseChart(){const s=monthlySummary();lineChart($("expenseChart"),s.map(([m])=>formatMonthShort(m)),s.map(([,x])=>x.expense),CONFIG.palette[1])}
-function renderWaterfall(){const rows=rowsForMonth(savingsMonth),income=sum(rows,"Income"),expense=sum(rows,"Expense"),saving=income-expense;waterfallChart($("waterfallChart"),income,expense,saving)}
+function renderWaterfall(){const rows=rowsForSavingsSelection(),income=sum(rows,"Income"),expense=sum(rows,"Expense"),saving=income-expense;waterfallChart($("waterfallChart"),income,expense,saving)}
 
 function svgEl(tag,attrs={}){const e=document.createElementNS("http://www.w3.org/2000/svg",tag);for(const[k,v]of Object.entries(attrs))e.setAttribute(k,v);return e}
 function setupSVG(el){el.innerHTML="";if(!el.clientWidth||!el.clientHeight)return null;const svg=svgEl("svg",{viewBox:`0 0 ${el.clientWidth} ${el.clientHeight}`,class:"svg-chart",preserveAspectRatio:"none"});el.appendChild(svg);return{svg,w:el.clientWidth,h:el.clientHeight}}
@@ -228,4 +285,5 @@ function formatDate(d){return d?d.toLocaleDateString("en-US",{month:"short",day:
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
 function setDataStatus(text,cls){$("dataStatus").textContent=text;$("dataStatus").className=`data-status ${cls}`}
 function showMessage(t){$("statusMessage").textContent=t;$("statusMessage").hidden=false}function hideMessage(){$("statusMessage").hidden=true}
+function formatTime(ts){return new Date(ts).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})}
 function debounce(fn,ms){let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),ms)}}

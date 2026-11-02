@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Personal finance dashboard powered by Google Sheets" />
-  <title>Personal Finance Dashboard V4</title>
+  <title>Personal Finance Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
-  <script defer src="app.js"></script>
+  <link rel="stylesheet" href="styles.css?v=03a0aa0e" />
+  <script defer src="app.js?v=03a0aa0e"></script>
 </head>
 <body>
 <div class="app-shell">
@@ -84,15 +84,26 @@
     </section>
 
     <section id="savingsPage" class="page">
-      <div class="page-filter-bar"><label>SAVINGS MONTH<select id="savingsMonthSelect"></select></label></div>
+      <div class="page-filter-bar">
+        <div class="multi-select" id="savingsMonthFilter">
+          <span class="multi-select-label">SAVINGS MONTHS</span>
+          <details class="multi-select-details">
+            <summary id="savingsMonthSummary">All months</summary>
+            <div class="multi-select-popover">
+              <div class="multi-select-actions"><button id="savingsSelectAll" type="button">Select All</button><button id="savingsClearAll" type="button">Clear All</button></div>
+              <div id="savingsMonthMenu" class="multi-select-menu"></div>
+            </div>
+          </details>
+        </div>
+      </div>
       <section class="savings-summary">
         <article><span>INCOME</span><strong id="savingIncome">—</strong></article>
         <article><span>EXPENSE</span><strong id="savingExpense">—</strong></article>
         <article><span>AVAILABLE TO ALLOCATE</span><strong id="savingAvailable">—</strong></article>
       </section>
       <section class="savings-grid">
-        <article class="panel allocation-panel"><div class="panel-heading"><div><p class="panel-kicker">MONTHLY PLAN</p><h2>Savings Allocation</h2></div></div><div id="allocationList" class="allocation-list"></div></article>
-        <article class="panel waterfall-panel"><div class="panel-heading"><div><p class="panel-kicker">CASH FLOW</p><h2>Monthly Waterfall</h2></div><div class="legend-inline"><span><i class="dot increase"></i>Increase</span><span><i class="dot decrease"></i>Decrease</span><span><i class="dot total"></i>Total</span></div></div><div id="waterfallChart" class="chart chart-lg"></div></article>
+        <article class="panel allocation-panel"><div class="panel-heading"><div><p class="panel-kicker">SELECTED PERIOD</p><h2>Savings Allocation</h2></div></div><div id="allocationList" class="allocation-list"></div></article>
+        <article class="panel waterfall-panel"><div class="panel-heading"><div><p class="panel-kicker">CASH FLOW</p><h2>Selected Period Waterfall</h2></div><div class="legend-inline"><span><i class="dot increase"></i>Increase</span><span><i class="dot decrease"></i>Decrease</span><span><i class="dot total"></i>Total</span></div></div><div id="waterfallChart" class="chart chart-lg"></div></article>
         <article class="panel savings-history"><div class="panel-heading"><div><p class="panel-kicker">SAVINGS BY CATEGORY</p><h2>Monthly Allocation Table</h2></div></div><div class="table-wrap"><table id="savingsTable"><thead id="savingsTableHead"></thead><tbody id="savingsTableBody"></tbody></table></div></article>
       </section>
     </section>
