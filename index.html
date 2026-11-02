@@ -8,17 +8,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=03a0aa0e" />
-  <script defer src="app.js?v=03a0aa0e"></script>
+  <link rel="stylesheet" href="styles.css?v=da0a5790" />
+  <script defer src="app.js?v=da0a5790"></script>
 </head>
 <body>
 <div class="app-shell">
   <aside class="sidebar">
     <div class="brand"><span>PERSONAL</span><strong>FINANCE</strong></div>
     <nav class="nav" aria-label="Main navigation">
-      <button class="nav-item active" data-page="dashboard">Dashboard</button>
-      <button class="nav-item" data-page="transactions">Transactions</button>
-      <button class="nav-item" data-page="savings">Savings</button>
+      <button class="nav-item active" data-page="dashboard" data-title="Dashboard">Dashboard</button>
+      <button class="nav-item" data-page="transactions" data-title="Transactions">Transactions</button>
+      <button class="nav-item" data-page="savings" data-title="Savings">Savings</button>
+      <button class="nav-item" data-page="check" data-title="Data check">Data check <span id="issueCount" class="nav-count" hidden></span></button>
     </nav>
     <div class="sidebar-footer">
       <label for="monthSelect">DASHBOARD MONTH</label>
@@ -29,7 +30,7 @@
   <main class="main-content">
     <header class="topbar">
       <div><p class="eyebrow">PERSONAL FINANCE</p><h1 id="pageTitle">Dashboard</h1></div>
-      <div class="topbar-actions"><span id="dataStatus" class="data-status">Loading data…</span><button id="refreshButton" class="button">Refresh</button></div>
+      <div class="topbar-actions"><button id="issueBadge" class="issue-badge" data-go="check" hidden></button><span id="dataStatus" class="data-status">Loading data…</span><button id="refreshButton" class="button">Refresh</button></div>
     </header>
     <div id="statusMessage" class="status-message" hidden></div>
 
@@ -38,7 +39,7 @@
         <article class="kpi-card kpi-income"><span>TOTAL INCOME</span><strong id="totalIncome">—</strong><small id="incomeMeta">Selected month</small></article>
         <article class="kpi-card kpi-expense"><span>TOTAL EXPENSE</span><strong id="totalExpense">—</strong><small id="expenseMeta">Selected month</small></article>
         <article class="kpi-card kpi-savings"><span>NET SAVINGS</span><strong id="netSavings">—</strong><small id="savingRate">—</small></article>
-        <article class="kpi-card kpi-budget"><span>MONTHLY BUDGET</span><strong>19M</strong><small>Planned expense</small></article>
+        <article class="kpi-card kpi-budget"><span>MONTHLY BUDGET</span><strong id="budgetTotal">—</strong><small id="budgetSource">Planned expense</small></article>
         <article class="kpi-card kpi-left"><span>BUDGET LEFT</span><strong id="budgetLeft">—</strong><small id="budgetUsage">—</small></article>
       </section>
 
@@ -99,13 +100,23 @@
       <section class="savings-summary">
         <article><span>INCOME</span><strong id="savingIncome">—</strong></article>
         <article><span>EXPENSE</span><strong id="savingExpense">—</strong></article>
-        <article><span>AVAILABLE TO ALLOCATE</span><strong id="savingAvailable">—</strong></article>
+        <article><span>INCOME − EXPENSE</span><strong id="savingAvailable">—</strong><small>Can be negative</small></article>
+        <article><span>MOVED TO SAVINGS</span><strong id="savingMoved">—</strong><small id="savingMovedMeta">Deposits minus withdrawals (saving tab)</small></article>
       </section>
       <section class="savings-grid">
-        <article class="panel allocation-panel"><div class="panel-heading"><div><p class="panel-kicker">SELECTED PERIOD</p><h2>Savings Allocation</h2></div></div><div id="allocationList" class="allocation-list"></div></article>
+        <article class="panel allocation-panel"><div class="panel-heading"><div><p class="panel-kicker">FROM THE SAVING TAB</p><h2>Savings Buckets</h2></div></div><div id="allocationList" class="allocation-list"></div></article>
         <article class="panel waterfall-panel"><div class="panel-heading"><div><p class="panel-kicker">CASH FLOW</p><h2>Selected Period Waterfall</h2></div><div class="legend-inline"><span><i class="dot increase"></i>Increase</span><span><i class="dot decrease"></i>Decrease</span><span><i class="dot total"></i>Total</span></div></div><div id="waterfallChart" class="chart chart-lg"></div></article>
-        <article class="panel savings-history"><div class="panel-heading"><div><p class="panel-kicker">SAVINGS BY CATEGORY</p><h2>Monthly Allocation Table</h2></div></div><div class="table-wrap"><table id="savingsTable"><thead id="savingsTableHead"></thead><tbody id="savingsTableBody"></tbody></table></div></article>
+        <article class="panel savings-history"><div class="panel-heading"><div><p class="panel-kicker">BY MONTH</p><h2>Income − Expense vs Money Moved to Savings</h2></div></div><div class="table-wrap"><table id="savingsTable"><thead id="savingsTableHead"></thead><tbody id="savingsTableBody"></tbody></table></div><p id="savingsTableNote" class="panel-note"></p></article>
       </section>
+    </section>
+
+    <section id="checkPage" class="page">
+      <article class="panel">
+        <div class="panel-heading"><div><p class="panel-kicker">DATA QUALITY</p><h2>Rows to check in Google Sheets</h2></div></div>
+        <p id="issueSummary" class="panel-note panel-note-top"></p>
+        <div class="table-wrap"><table><thead><tr><th class="num">Sheet row</th><th>Month</th><th>Type / tab</th><th>Item</th><th class="num">Amount</th><th>Problem</th><th>In totals?</th></tr></thead><tbody id="issueTableBody"></tbody></table></div>
+        <p class="panel-note">"Not counted" rows are left out of every total until fixed. Row numbers refer to the transaction tab unless the type says "saving tab".</p>
+      </article>
     </section>
   </main>
 </div>

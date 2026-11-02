@@ -10,6 +10,13 @@ Live site: https://capiepara.github.io/Finance_dashboard_AA/
 - The top bar shows `Live · updated HH:MM`. If a background reload fails, the current data stays on screen and the status shows `Offline`.
 - The sheet must stay shared as "Anyone with the link can view".
 
+## V5.2 changes
+- Reads the `transaction` tab through the export link, so filters switched on in the sheet no longer hide rows
+- **Data check** page: rows left out of totals (e.g. empty Type) and rows to review, with their sheet row numbers
+- Savings page shows real money from the `saving` tab: moved per bucket and running balance; months that spent more than they earned show as negative
+- Monthly budget comes from the `budget` tab (falls back to 19M if the tab is missing)
+- The current month is marked "in progress" (period runs to the 22nd; salary day rule = 23rd)
+
 ## V5.1 changes
 - Automatic data refresh (every 5 minutes and on returning to the tab)
 - Last-updated time in the status badge
