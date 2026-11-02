@@ -11,7 +11,7 @@ Live site: https://capiepara.github.io/Finance_dashboard_AA/
 - The sheet must stay shared as "Anyone with the link can view".
 
 ## V5.4 changes
-- Navy / slate theme: Smart Blue, Steel Azure, Regal Navy, Prussian Blue, Twilight Indigo, Blue Slate, Slate Grey, Cool Steel. Chart order Smart Blue → Cool Steel → Regal Navy → Blue Slate (neighbours checked for color-blind safety); coral only marks money going out / negatives
+- Navy / slate theme in one tone family: Steel Azure (main), Cool Steel, Navy, Blue Slate for chart series (neighbours checked for color-blind safety); Slate Grey for expenses, withdrawals and negative values (always below the zero line, with a minus sign). No coral.
 - Square bar ends
 
 ## V5.3 changes

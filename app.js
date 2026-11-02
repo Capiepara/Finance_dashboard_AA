@@ -14,10 +14,10 @@ const CONFIG={
   goal:{amount:500000000,years:5,annualReturn:5}   // savings goal; editable on the Goal plan page
 };
 
-// Navy / slate palette. Slot order keeps neighbours apart for color-blind readers (checked: adjacent ΔE ≥ 14.9).
-// The greys are low-chroma by design, so every chart also has a legend, labels and hover values.
-// Coral is used only for money going out / negative values.
-const COLORS={s1:"#0466C8",s2:"#979DAC",s3:"#023E7D",s4:"#5C677D",neg:"#D1603D",other:"#D3D8E0",ref:"#7D8597"};
+// Calm navy / slate palette, one tone family. Slot order keeps neighbours apart for color-blind
+// readers (checked: adjacent ΔE ≥ 22.7). Greys are low-chroma by design, so every chart also has a
+// legend, labels and hover values. Money going out / negatives use Slate Grey and sit below zero.
+const COLORS={s1:"#0353A4",s2:"#979DAC",s3:"#002855",s4:"#5C677D",neg:"#7D8597",other:"#D3D8E0",ref:"#979DAC"};
 const CATEGORICAL=[COLORS.s1,COLORS.s2,COLORS.s3,COLORS.s4];
 const ENTITY={Albert:COLORS.s1,Annie:COLORS.s2,Fixed:COLORS.s1,Meal:COLORS.s2,Unexpected:COLORS.s3,Uncategorized:COLORS.other,Other:COLORS.other};
 function entityColor(name,i=0){return ENTITY[name]||CATEGORICAL[i%CATEGORICAL.length]}
@@ -662,7 +662,7 @@ function fanChart(el,labels,plan,base50,goal){
   const n=labels.length-1;
   addText(svg,formatMoney(plan.p50[n]),xAt(n),y(plan.p50[n])-8,"data-label","end");
   addText(svg,formatMoney(base50[n]),xAt(n),y(base50[n])+16,"axis-text","end");
-  legend(svg,[{name:"With plan (typical)",color:COLORS.s1},{name:"80% of outcomes",color:"rgba(4,102,200,.3)"},{name:"No change (typical)",color:COLORS.ref}],L,16);
+  legend(svg,[{name:"With plan (typical)",color:COLORS.s1},{name:"80% of outcomes",color:"rgba(3,83,164,.25)"},{name:"No change (typical)",color:COLORS.ref}],L,16);
   xLabels(svg,labels,xAt,h);
   // crosshair hover
   const cross=svgEl("line",{y1:T,y2:T+ph,class:"crosshair",visibility:"hidden"});svg.appendChild(cross);
